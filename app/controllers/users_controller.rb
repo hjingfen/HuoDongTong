@@ -24,5 +24,22 @@ class UsersController < ApplicationController
 
   end
 
+  def new
+    user = User.find_by(:name => params['name'])
+    if user
+      flash[:registed_error] = '该账号已注册！'
+      redirect_to :action => :regist
+    else if params['password'] == params['confirm_password']
+           flash[:not_same_error] = '两次密码不一致！'
+           redirect_to :action => :regist
+         else
+           redirect_to :action => :welcome
+    end
+    end
+  end
+
+  def create
+
+  end
 
 end
