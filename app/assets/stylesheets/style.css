@@ -1,0 +1,11 @@
+.login-box{
+    display: block;
+    background: #F5F5F5;
+    width: 500px;
+    height: 300px;
+    border-radius: 5px;
+    margin: 0 auto;
+    padding: 20px;
+
+}
+

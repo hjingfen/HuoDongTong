@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
-  root 'user#login'
-  get '/signup' => 'user#signup', :as => 'signup'
+  get 'session/welcome'
+
+  get 'session/index'
+
+  get 'session/register'
+
+  root 'user#index'
+  get '/register' => 'user#register', :as => 'register'
   get '/welcome' => 'user#welcome', :as=> 'welcome'
 
   # The priority is based upon order of creation: first created -> highest priority.

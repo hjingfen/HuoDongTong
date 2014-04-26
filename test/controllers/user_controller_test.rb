@@ -6,13 +6,13 @@ class UserControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get login" do
-    get :login
+  test "should get index" do
+    get :index
     assert_response :success
   end
 
-  test "should get signup" do
-    get :signup
+  test "should get register" do
+    get :register
     assert_response :success
   end
 
