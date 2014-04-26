@@ -1,11 +1,20 @@
 class SessionController < ApplicationController
-  def welcome
-  end
 
   def index
+
   end
 
-  def register
+  def signin
+
   end
-  
+
+  def welcome
+
+  end
+
+  def regist
+
+  end
+
+
 end
