@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   get '/regist' => 'users#regist', :as => 'regist'
 
-  get '/welcome' => 'users#welcome', :as=> 'welcome'
+  get '/welcome' => 'users#welcome', :as => 'welcome'
 
   post '/signin' => 'users#signin'
 

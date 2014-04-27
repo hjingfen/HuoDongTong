@@ -32,10 +32,11 @@ class UsersController < ApplicationController
         redirect_to :action => :regist
       else
         if params['password'] != params['confirm_password']
-          flash[:not_same_error] = '两次密码不一致！'
+          flash[:not_same_error] = '两次密码不一致，请重新输入！'
           redirect_to :action => :regist
         else
-
+          user = User.new(:name =>params['name'], :password => params['password'], :question => params['question'], :answer => params['answer'])
+          user.save
           redirect_to :action => :welcome
         end
       end
