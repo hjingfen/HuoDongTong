@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   end
 
   def welcome
-
+    @name = session[:user_name]
   end
 
   def regist
@@ -26,25 +26,20 @@ class UsersController < ApplicationController
 
   def new
     user = User.find_by(:name => params['name'])
-    if (params['name'] && params['password'] && params['confirm_password'] && params['question'] && params['answer']).present?
-      if user.present?
-        flash[:registed_error] = '该账号已注册！'
+    if user.present?
+      flash[:registed_error] = '该账号已注册！'
+      redirect_to :action => :regist
+    else
+      if params['password'] != params['confirm_password']
+        flash[:not_same_error] = '两次密码不一致，请重新输入！'
         redirect_to :action => :regist
       else
-        if params['password'] != params['confirm_password']
-          flash[:not_same_error] = '两次密码不一致，请重新输入！'
-          redirect_to :action => :regist
-        else
-          user = User.new(:name =>params['name'], :password => params['password'], :question => params['question'], :answer => params['answer'])
-          user.save
-          redirect_to :action => :welcome
-        end
+        user = User.new(:name =>params['name'], :password => params['password'], :question => params['question'], :answer => params['answer'])
+        session[:user_name] = params['name']
+        user.save
+        redirect_to :action => :welcome
       end
-    else
-      flash[:null_error] = '请将注册信息填写完整！'
-      redirect_to :action => :regist
     end
-
   end
 
   def create
