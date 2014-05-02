@@ -9,7 +9,8 @@ class UsersController < ApplicationController
   def signin
     user = User.find_by(:name => params['name'], :password => params['password'])
     if user
-     redirect_to :action => :welcome
+      session[:user_name] = user.name
+      redirect_to :action => :welcome
     else
       flash[:signin_error]='账号密码有误！'
       redirect_to :action => :index
@@ -44,6 +45,11 @@ class UsersController < ApplicationController
 
   def create
 
+  end
+
+  def signout
+    session[:user_name] = nil
+    redirect_to :action => :index
   end
 
 end
