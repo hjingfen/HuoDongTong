@@ -1,16 +1,18 @@
 Rails.application.routes.draw do
 
-  root 'users#index'
+  root 'session#index'
 
-  get '/regist' => 'users#regist', :as => 'regist'
+  get 'session/index'
 
-  get '/welcome' => 'users#welcome', :as => 'welcome'
+  post '/signin' => 'session#signin'
 
-  post '/signin' => 'users#signin'
+  get '/signout' => 'session#signout'
 
-  post '/new' => 'users#new'
+  get '/users/new' => 'users#new'
 
-  get '/signout' => 'users#signout'
+  get '/welcome' => 'users#welcome'
+
+  post '/users/create' => 'users#create'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

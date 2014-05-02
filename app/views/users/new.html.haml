@@ -4,7 +4,7 @@
     %h4新用户注册
     %a.navbar-right(style="text-decoration: none;padding-right:20px" href="/" )用户登录
   %br
-  %form(name='new_user' action="/new" method="post"  onsubmit="return check_form()")
+  %form(name='new_user' action="/users/create" method="post"  onsubmit="return check_form()")
     .col-md-12.input-group
       %span.input-group-addon( style="width:109px" ) 账号
       %input.form-control(name='name' type="text" )
@@ -25,19 +25,11 @@
       %span.input-group-addon(style="width:109px") 忘记密码答案
       %input.form-control(name='answer' type="text" )
     %br
-    .text-center.alert-danger#error_alert(style="display:none" )
-      %p(style="height:30px;line-height:30px;" ) 请将注册信息填写完整！
-    -if flash[:registed_error]
-      .text-center.alert-danger
-        %p(style="height:30px;line-height:30px;" )
-          = flash[:registed_error]
-    -if flash[:not_same_error]
-      .text-center.alert-danger
-        %p(style="height:30px;line-height:30px;" )
-          = flash[:not_same_error]
+    .text-center.alert-danger#error_alert(style="display:#{flash[:registed_error].present? ? 'static' : 'none'}" )
+      %p(style="height:30px;line-height:30px;" )
+        = flash[:registed_error]
     %br
     .col-md-4
     .col-md-4
       %input.form-control.btn.btn-default(type="submit"   value="注册" )
-
     .col-md-4

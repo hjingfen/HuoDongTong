@@ -3,9 +3,14 @@ function check_form() {
         return $(el).val() == '';
     });
     if(empty_inputs.length == 0){
-        return true
+        if($(':password:eq(0)').val() != $(':password:eq(1)').val()){
+            $('#error_alert').show().find('p').text('两次密码输入不一致！');
+            $(':password').val('');
+            return false;
+        }
+        return true;
     }else{
-        $('#error_alert').show();
+        $('#error_alert').show().find('p').text('请将注册信息填写完整！');
         return false;
     }
 }
