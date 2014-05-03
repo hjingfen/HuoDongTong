@@ -17,12 +17,14 @@
         %table.table(style="text-align:center" )
           %thead
             %tr
-              %td 编号
-              %td 用户名
-              %td 操作
+              %th.text-center 编号
+              %th.text-center 用户名
+              %th.text-center 操作
           %tbody
             - @users.each do |user|
               %tr
-                %td= 1
+                %td= user.id
                 %td= user.name
-                %td= user.name
+                %td
+                  %a(style="text-decoration: none;padding-right:20px" href="/" )删除
+                  %a(style="text-decoration: none;padding-right:20px" href="/" )修改密码
