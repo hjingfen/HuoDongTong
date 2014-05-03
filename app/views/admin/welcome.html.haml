@@ -5,3 +5,9 @@
   你好,
   = @name
   %a(style="text-decoration:nome" href="/signout" )退出
+.index-box
+  %h4
+    用户管理
+    %button(style="height:25px" href="" )+添加用户
+  - @users.each do |d|
+    =d.name
