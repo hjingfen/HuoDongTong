@@ -3,7 +3,6 @@ class SessionController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def index
-    
   end
 
   def signin
@@ -12,7 +11,7 @@ class SessionController < ApplicationController
       session[:user_id] = user.id
       redirect_to :controller => :users, :action => :welcome
     else
-      flash[:signin_error]='账号密码有误！'
+      flash[:signin_error]='用户名不存在或密码错误！'
       redirect_to :action => :index
     end
   end
