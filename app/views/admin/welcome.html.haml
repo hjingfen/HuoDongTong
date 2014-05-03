@@ -1,13 +1,28 @@
-.navbar-left
-  %h1活动通
-.navbar-right
-  %br
-  你好,
-  = @name
-  %a(style="text-decoration:nome" href="/signout" )退出
-.index-box
-  %h4
-    用户管理
-    %button(style="height:25px" href="" )+添加用户
-  - @users.each do |d|
-    =d.name
+.container(style="margin-top:5px;margin-left:15px " )
+  .row(style="width:1300px;" )
+    .col-xs-3
+      %h1活动通
+    .col-xs-7
+    .col-xs-2(style="margin-top:20px; text-align:right" )
+      你好,
+      = @name
+      %a(style="text-decoration:nome" href="/signout" )退出
+  .row(style="width:1300px;")
+    .col-xs-12
+      .panel.panel-default
+        .panel-heading(style="padding:2px 15px" )
+          %h4
+            用户管理
+            %button.btn-4(style="font-size:14px;margin-left: 20px;" href="" )+添加用户
+        %table.table(style="text-align:center" )
+          %thead
+            %tr
+              %td 编号
+              %td 用户名
+              %td 操作
+          %tbody
+            - @users.each do |user|
+              %tr
+                %td= 1
+                %td= user.name
+                %td= user.name
