@@ -10,9 +10,11 @@ Rails.application.routes.draw do
 
   get '/users/new' => 'users#new'
 
-  get '/welcome' => 'users#welcome'
+  get 'users/welcome' => 'users#welcome'
 
   post '/users/create' => 'users#create'
+
+  get 'admin/welcome' => 'admin#welcome'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

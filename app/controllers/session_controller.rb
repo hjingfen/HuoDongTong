@@ -7,7 +7,10 @@ class SessionController < ApplicationController
 
   def signin
     user = User.find_by(:name => params['name'], :password => params['password'])
-    if user
+    if user && user.question == nil
+      session[:user_id] = user.id
+      redirect_to :controller => :admin, :action => :welcome
+    elsif user
       session[:user_id] = user.id
       redirect_to :controller => :users, :action => :welcome
     else
