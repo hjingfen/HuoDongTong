@@ -1,25 +1,28 @@
-%h1活动通
-.index-box
-  .clearfix
-    %h4用户登录
-    %a.navbar-right(style="text-decoration: none;padding-right:20px" href="/users/new" )用户注册
-  %form(name='user' action="/signin" method="post" )
-    .input-group
-      %span.input-group-addon 账号
-      %input.form-control(name="name" type="text" )
-    %br
-    .input-group
-      %span.input-group-addon 密码
-      %input.form-control(name="password" type="password" )
-    .clearfix
-      %a.navbar-right(style="text-decoration:none;padding-right:20px" )忘记密码
-    %br
-    -if flash[:signin_error]
-      .text-center.alert-danger
-        %p(style="height:30px;line-height:30px;" ) 用户名不存在或密码错误！
-    %br
-    .col-md-4
-    .col-md-4
-      %button.form-control.btn.btn-default(type="submit" )
-        登录
-    .col-md-4
+.container(style="margin-top:5px;margin-left:15px " )
+  .row(style="width:1300px;text-align:left" )
+    %h1活动通
+  .row(style="width:1300px" )
+    .index-box
+      .clearfix
+        %h4用户登录
+        %a.navbar-right(style="text-decoration: none;padding-right:20px" href="/users/new" )用户注册
+      %form(name='user' action="/signin" method="post" )
+        .input-group
+          %span.input-group-addon 账号
+          %input.form-control(name="name" type="text" )
+        %br
+        .input-group
+          %span.input-group-addon 密码
+          %input.form-control(name="password" type="password" )
+        .clearfix
+          %a.navbar-right(style="text-decoration:none;padding-right:20px" )忘记密码
+        %br
+        -if flash[:signin_error]
+          .text-center.alert-danger
+            %p(style="height:30px;line-height:30px;" ) 用户名不存在或密码错误！
+        %br
+        .col-md-4
+        .col-md-4
+          %button.form-control.btn.btn-default(type="submit" )
+            登录
+
