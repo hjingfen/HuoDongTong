@@ -31,4 +31,4 @@
   .row(style="width:1280px" )
     .col-xl-1
     .col-xl-11(style="text-align:right" )
-      = will_paginate @users
+      = will_paginate @users,:previous_label => '&laquo',:next_label =>'&raquo'
