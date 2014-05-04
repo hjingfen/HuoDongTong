@@ -1,20 +1,20 @@
 .container
-  .row(style="width:1300px;" )
-    .col-xs-3
+  .row(style="width:1320px;" )
+    .col-xs-3(style="padding-left:45px" )
       %h1活动通
     .col-xs-7
     .col-xs-2(style="margin-top:20px; text-align:right" )
       你好,
       = @name
       %a(style="text-decoration:nome" href="/signout" )退出
-  .row(style="width:1333px" )
-    %ol.breadcrumb
-      %li
-        %a(href="#" )
-          首页
-      %li.active
-        添加用户
-  .row(style="width:1300px" )
+%ol.breadcrumb(style="padding-left:52px" )
+  %li
+    %a(href="#" )
+      首页
+  %li.active
+    添加用户
+.container
+  .row(style="width:1350px" )
     .new_user-box
       %form(name='new_user' action="/admin/add_user" method="post"  onsubmit="return check_form()")
         .col-md-12.input-group

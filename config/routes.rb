@@ -14,8 +14,6 @@ Rails.application.routes.draw do
 
   get '/admin/welcome' => 'admin#welcome'
 
-  #get 'admin/go_new_user' => 'admin#go_new_user'
-
   get '/admin/new_user' => 'admin#new_user'
 
   post '/admin/add_user' => 'admin#add_user'

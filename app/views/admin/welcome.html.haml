@@ -1,19 +1,18 @@
-.container(style="margin-top:5px;margin-left:15px " )
-  .row(style="width:1300px;" )
-    .col-xs-3
+.container
+  .row(style="width:1320px;" )
+    .col-xs-3(style="padding-left:45px" )
       %h1活动通
-    .col-xs-7
-    .col-xs-2(style="margin-top:20px; text-align:right" )
+    .col-xs-9(style="margin-top:20px; text-align:right" )
       你好,
       = @name
       %a(style="text-decoration:nome" href="/signout" )退出
-  .row(style="width:1300px;")
-    .col-xs-12
+  .row(style="width:1320px;")
+    .col-xs-12(style="padding-left:45px" )
       .panel.panel-default
         .panel-heading(style="padding:2px 15px" )
           %h4
             用户管理
-            %button.btn-4(style="font-size:14px;margin-left: 20px;"  href="/admin/new_user" )+添加用户
+            %a.btn.btn-default(style="font-size:13px; margin-left:20px; background-color:#F0F0F0" href="/admin/new_user")+添加用户
         %table.table(style="text-align:center" )
           %thead
             %tr
@@ -21,9 +20,12 @@
               %th.text-center 用户名
               %th.text-center 操作
           %tbody
+            - a = 1
             - @users.each do |user|
               %tr
-                %td= user.id
+                %td
+                  = a
+                  - a += 1
                 %td= user.name
                 %td
                   %a(style="text-decoration: none;padding-right:20px" href="/" )删除
