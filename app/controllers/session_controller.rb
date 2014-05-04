@@ -7,10 +7,11 @@ class SessionController < ApplicationController
 
   def signin
     user = User.find_by(:name => params['name'], :password => params['password'])
-    session[:user_id] = user.id
     if user && user.admin == 'admin'
+      session[:user_id] = user.id
       redirect_to :controller => :admin, :action => :welcome
     elsif user
+      session[:user_id] = user.id
       redirect_to :controller => :users, :action => :welcome
     else
       flash[:signin_error]='用户名不存在或密码错误！'
