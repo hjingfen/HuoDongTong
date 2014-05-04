@@ -2,19 +2,23 @@ Rails.application.routes.draw do
 
   root 'session#index'
 
-  get 'session/index'
-
   post '/signin' => 'session#signin'
 
   get '/signout' => 'session#signout'
 
   get '/users/new' => 'users#new'
 
-  get 'users/welcome' => 'users#welcome'
+  get '/users/welcome' => 'users#welcome'
 
   post '/users/create' => 'users#create'
 
-  get 'admin/welcome' => 'admin#welcome'
+  get '/admin/welcome' => 'admin#welcome'
+
+  #get 'admin/go_new_user' => 'admin#go_new_user'
+
+  get '/admin/new_user' => 'admin#new_user'
+
+  post '/admin/add_user' => 'admin#add_user'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
