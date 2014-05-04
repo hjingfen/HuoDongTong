@@ -1,7 +1,9 @@
-.navbar-left
-  %h1活动通
-.navbar-right
-  %br
-  你好,
-  = @name
-  %a(style="text-decoration:nome" href="/signout" )退出
+.container(style="margin-top:5px;margin-left:15px " )
+  .row(style="width:1300px;" )
+    .col-xs-3
+      %h1活动通
+    .col-xs-7
+    .col-xs-2(style="margin-top:20px; text-align:right" )
+      你好,
+      = @name
+      %a(style="text-decoration:nome" href="/signout" )退出
