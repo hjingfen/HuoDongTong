@@ -1,13 +1,13 @@
 .container
   .row(style="width:1320px;" )
-    .col-xs-3(style="padding-left:45px" )
+    .col-xs-3(style="padding-left:55px" )
       %h1活动通
     .col-xs-9(style="margin-top:20px; text-align:right" )
       你好,
       = @name
       %a(style="text-decoration:nome" href="/signout" )退出
   .row(style="width:1320px;")
-    .col-xs-12(style="padding-left:45px" )
+    .col-xs-12(style="padding-left:55px" )
       .panel.panel-default
         .panel-heading(style="padding:2px 15px" )
           %h4
@@ -30,6 +30,6 @@
                 %td
                   %a(style="text-decoration: none;padding-right:20px" href="/" )删除
                   %a(style="text-decoration: none;padding-right:20px" href="/" )修改密码
-  .row(style="width:1280px")
+  .row(style="width:1305px")
     .col-xl-12(style="text-align:right" )
       = will_paginate @users,:previous_label => '&laquo',:next_label =>'&raquo'

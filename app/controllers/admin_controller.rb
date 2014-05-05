@@ -3,8 +3,12 @@ class AdminController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def welcome
-    @name = User.find(session[:user_id]).name
-    @users = User.where(:admin => nil).paginate(page: params[:page],:per_page => 10)
+    if session[:user_id].present?
+      @name = User.find(session[:user_id]).name
+      @users = User.where(:admin => nil).paginate(page: params[:page],:per_page => 10)
+    else
+      redirect_to :controller => :session, :action => :index
+    end
   end
 
   def new_user

@@ -20,7 +20,7 @@ class SessionController < ApplicationController
   end
 
   def signout
-    session[:user_name] = nil
+    session[:user_id] = nil
     redirect_to :action => :index
   end
 
