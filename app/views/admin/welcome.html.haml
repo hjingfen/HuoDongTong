@@ -29,7 +29,7 @@
                 %td= user.name
                 %td
                   = link_to '删除', user, :method => :delete, :data => { :confirm => '您确定要删除' + user.name + '吗？'}
-                  %a(style="text-decoration: none;padding-right:20px" href="/" )修改密码
+                  %a(style="text-decoration: none;padding-right:20px" href="/admin/change" )修改密码
   .row(style="width:1320px" )
     -if flash[:delete_success]
       .text-center.alert-success
