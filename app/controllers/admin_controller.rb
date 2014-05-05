@@ -26,4 +26,11 @@ class AdminController < ApplicationController
       redirect_to :controller => :session, :action => :index
     end
   end
+
+  def delete
+    User.find(params[:format]).destroy
+    flash[:delete_success] = '删除用户成功！'
+    redirect_to :action => :welcome
+  end
+
 end

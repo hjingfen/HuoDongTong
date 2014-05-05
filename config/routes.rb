@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
   post '/admin/add_user' => 'admin#add_user'
 
+  delete '/admin/delete' => 'admin#delete', :as => :user
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

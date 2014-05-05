@@ -28,8 +28,12 @@
                   - a += 1
                 %td= user.name
                 %td
-                  %a(style="text-decoration: none;padding-right:20px" href="/" )删除
+                  = link_to '删除', user, :method => :delete, :data => { :confirm => '您确定要删除' + user.name + '吗？'}
                   %a(style="text-decoration: none;padding-right:20px" href="/" )修改密码
+  .row(style="width:1320px" )
+    -if flash[:delete_success]
+      .text-center.alert-success
+        %p(style="height:30px;line-height:30px;" ) 删除用户成功！
   .row(style="width:1305px")
     .col-xl-12(style="text-align:right" )
       = will_paginate @users,:previous_label => '&laquo',:next_label =>'&raquo'
