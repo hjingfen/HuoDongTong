@@ -37,8 +37,8 @@ class AdminController < ApplicationController
     @name = User.find_by(session[:admin_id]).name
   end
 
-  #def signout
-  #  session[:admin_id] = nil
-  #  redirect_to :controller => :session, :action => :index
-  #end
+  def signout
+    session[:admin_id] = nil
+    redirect_to :controller => :session, :action => :index
+  end
 end
