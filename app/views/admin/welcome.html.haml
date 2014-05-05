@@ -4,7 +4,7 @@
       %h1活动通
     .col-xs-9(style="margin-top:20px; text-align:right" )
       你好,
-      = @name
+      = @admin_name
       %a(style="text-decoration:nome" href="/admin/signout" )退出
   .row(style="width:1320px;")
     .col-xs-12(style="padding-left:55px" )
@@ -20,7 +20,7 @@
               %th.text-center 用户名
               %th.text-center 操作
           %tbody
-            - a = 1
+            - a = (session[:a]-1)*10+1
             - @users.each do |user|
               %tr
                 %td
@@ -28,7 +28,7 @@
                   - a += 1
                 %td= user.name
                 %td
-                  = link_to '删除', user, :method => :delete, :data => { :confirm => '您确定要删除' + user.name + '吗？'}
+                  = link_to '删除', delete_user_path(:id=>user.id), :action => 'delete', :data=>{:confirm=>"您确定要删除\"#{user.name}\"吗？"}
                   %a(style="text-decoration: none;padding-right:20px" href="/admin/change" )修改密码
   .row(style="width:1320px" )
     -if flash[:delete_success]

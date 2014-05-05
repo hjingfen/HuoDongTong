@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
   get '/admin/signout' => 'admin#signout'
 
-  delete '/admin/delete' => 'admin#delete', :as => :user
+  delete 'delete_user' => 'admin#delete'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

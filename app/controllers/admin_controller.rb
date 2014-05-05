@@ -3,8 +3,9 @@ class AdminController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def welcome
+    session[:a] = params[:page] ? params[:page].to_i : 1
     if session[:admin_id].present?
-      @name = User.find(session[:admin_id]).name
+      @admin_name = User.find(session[:admin_id]).name
       @users = User.where(:admin => nil).paginate(page: params[:page],:per_page => 10)
     else
       redirect_to :controller => :session, :action => :index
@@ -12,7 +13,7 @@ class AdminController < ApplicationController
   end
 
   def new_user
-    @name = User.find(session[:admin_id]).name
+    @admin_name = User.find(session[:admin_id]).name
   end
 
   def add_user
@@ -28,13 +29,13 @@ class AdminController < ApplicationController
   end
 
   def delete
-    User.find(params[:format]).destroy
+    User.find_by_id(params[:id]).destroy
     flash[:delete_success] = '删除用户成功！'
     redirect_to :action => :welcome
   end
 
   def change
-    @name = User.find_by(session[:admin_id]).name
+    @admin_name = User.find_by(session[:admin_id]).name
   end
 
   def signout
