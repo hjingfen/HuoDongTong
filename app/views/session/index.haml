@@ -7,12 +7,12 @@
         %h4用户登录
         %a.navbar-right(style="text-decoration: none;padding-right:20px" href="/users/new" )用户注册
       %form(name='user' action="/signin" method="post" )
-        .input-group
-          %span.input-group-addon 账号
+        .col-xs-12.input-group
+          %span.input-group-addon( style="width:109px" ) 账号
           %input.form-control(name="name" type="text" )
         %br
-        .input-group
-          %span.input-group-addon 密码
+        .col-xs-12.input-group
+          %span.input-group-addon( style="width:109px" ) 密码
           %input.form-control(name="password" type="password" )
         .clearfix
           %a.navbar-right(style="text-decoration:none;padding-right:20px" )忘记密码
@@ -21,8 +21,8 @@
           .text-center.alert-danger
             %p(style="height:30px;line-height:30px;" ) 用户名不存在或密码错误！
         %br
-        .col-md-4
-        .col-md-4
+        .col-xs-4
+        .col-xs-4
           %button.form-control.btn.btn-default(type="submit" )
             登录
 
