@@ -44,7 +44,7 @@ class AdminController < ApplicationController
     user = User.find_by_id(session[:change_password_id])
     user.password = params[:new_password]
     user.save
-    redirect_to :action => :welcome
+    #redirect_to :action => :welcome
   end
 
   def signout
