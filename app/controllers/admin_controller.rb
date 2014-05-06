@@ -41,6 +41,9 @@ class AdminController < ApplicationController
   end
 
   def save_password
+    user = User.find_by_id(session[:change_password_id])
+    user.password = params[:new_password]
+    user.save
     redirect_to :action => :welcome
   end
 
