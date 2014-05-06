@@ -34,8 +34,14 @@ class AdminController < ApplicationController
     redirect_to :action => :welcome
   end
 
-  def change
+  def change_password
     @admin_name = User.find_by(session[:admin_id]).name
+    @name = User.find_by_id(params[:id]).name
+    session[:change_password_id] = User.find_by_id(params[:id]).id
+  end
+
+  def save_password
+    redirect_to :action => :welcome
   end
 
   def signout

@@ -4,7 +4,7 @@ function check_form() {
     });
     if(empty_inputs.length == 0){
         if($(':password:eq(0)').val() != $(':password:eq(1)').val()){
-            $('#error_alert').show().find('p').text('两次密码输入不一致！');
+            $('#error_alert').show().find('p').text('两次密码输入不一致,请重新输入！');
             $(':password').val('');
             return false;
         }

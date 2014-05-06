@@ -18,7 +18,9 @@ Rails.application.routes.draw do
 
   post '/admin/add_user' => 'admin#add_user'
 
-  get '/admin/change' => 'admin#change'
+  get 'change_password' => 'admin#change_password'
+
+  post 'save_password' => 'admin#save_password'
 
   get '/admin/signout' => 'admin#signout'
 
