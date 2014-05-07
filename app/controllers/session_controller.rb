@@ -47,4 +47,8 @@ class SessionController < ApplicationController
     user = User.find_by(:id => session[:user_id])
     @question = user.question
   end
+
+  def forgot3
+    
+  end
 end
