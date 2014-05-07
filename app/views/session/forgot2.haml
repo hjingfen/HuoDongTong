@@ -10,15 +10,11 @@
       %form
         .col-xs-12.input-group
           %span.input-group-addon( style="width:109px" ) 忘记密码问题
-          %input.form-control(name="name" type="text" disabled="disabled" )
+          %input.form-control(name="name" type="text" value="#{@question}" disabled="disabled" )
         %br
         .col-xs-12.input-group
           %span.input-group-addon( style="width:109px" ) 忘记密码答案
           %input.form-control(name="name" type="text" placeholder="请输入答案")
-        %br
-        -if flash[:user_name_error]
-          .text-center.alert-danger
-          %p(style="height:30px;line-height:30px;" ) 用户名不存在！
         %br
         .col-xs-4
         .col-xs-4

@@ -30,7 +30,7 @@ Rails.application.routes.draw do
 
   post '/session/get_user_name' => 'session#get_user_name'
 
-  get '/session/forgot2' => '/session#forgot2'
+  get '/session/forgot2' => 'session#forgot2'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

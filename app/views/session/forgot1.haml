@@ -14,7 +14,10 @@
         %br
         -if flash[:user_name_error]
           .text-center.alert-danger
-          %p(style="height:30px;line-height:30px " ) 用户名不存在！
+            %p(style="height:30px;line-height:30px " ) 用户名不存在！
+        -if flash[:nil_error]
+          .text-center.alert-danger
+            %p(style="height:30px;line-height:30px " ) 账号不能为空！
         %br
         .col-xs-4
         .col-xs-4
