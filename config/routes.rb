@@ -26,6 +26,11 @@ Rails.application.routes.draw do
 
   delete 'delete_user' => 'admin#delete'
 
+  get '/session/forgot1' => 'session#forgot1'
+
+  post '/session/get_user_name' => 'session#get_user_name'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

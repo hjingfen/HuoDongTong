@@ -24,4 +24,20 @@ class SessionController < ApplicationController
     redirect_to :action => :index
   end
 
+  def forgot1
+
+  end
+
+  def get_user_name
+    user = User.find_by(:name => params['name'])
+    if user
+      session[:user_id] = user.id
+      #redirect_to :action => :forgot2
+    else
+      flash[:user_name_error]='用户名不存在！'
+      redirect_to :action => :forgot1
+    end
+  end
+
+
 end
