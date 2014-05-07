@@ -48,7 +48,17 @@ class SessionController < ApplicationController
     @question = user.question
   end
 
+  def get_answer
+    user = User.find_by(:id => session[:user_id])
+    if user.answer == params[:answer]
+      redirect_to :action => :forgot3
+    else
+      flash[:answer_error] = '忘记密码答案错误！'
+      redirect_to :action => :forgot2
+    end
+  end
+
   def forgot3
-    
+
   end
 end

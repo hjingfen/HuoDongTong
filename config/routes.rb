@@ -32,6 +32,8 @@ Rails.application.routes.draw do
 
   get '/session/forgot2' => 'session#forgot2'
 
+  post '/session/get_answer' => 'session#get_answer'
+
   get '/session/forgot3' => 'session#forgot3'
 
   # The priority is based upon order of creation: first created -> highest priority.
