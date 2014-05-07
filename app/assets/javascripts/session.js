@@ -14,3 +14,14 @@ function check_form() {
         return false;
     }
 }
+
+function check_password(){
+    if($(':password:eq(0)').val() != $(':password:eq(1)').val()){
+        $('#password_error_alert').show().find('p').text('两次密码输入不一致,请重新输入！');
+        $(':password').val('');
+        return false;
+    }
+    else{
+        return true;
+    }
+}

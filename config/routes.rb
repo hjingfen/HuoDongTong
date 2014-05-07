@@ -36,6 +36,8 @@ Rails.application.routes.draw do
 
   get '/session/forgot3' => 'session#forgot3'
 
+  post '/session/save_password' => 'session#save_password'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

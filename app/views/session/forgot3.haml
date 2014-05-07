@@ -7,7 +7,7 @@
         %h4重置密码
         %a.navbar-right(style="text-decoration: none;padding-right:20px" href="/" )用户登录
       %br
-      %form
+      %form(name='password' action="/session/save_password" method="post" onsubmit="return check_password()" )
         .col-xs-12.input-group
           %span.input-group-addon( style="width:109px" ) 请设置密码
           %input.form-control(name="password" type="password" placeholder="请输入密码")
@@ -15,6 +15,10 @@
         .col-xs-12.input-group
           %span.input-group-addon( style="width:109px" ) 请确认密码
           %input.form-control(name="confirm_password" type="password" placeholder="请再次输入")
+        %br
+        .text-center.alert-danger#password_error_alert(style="display:#{flash[:password_error].present? ? 'static' : 'none'}" )
+          %p(style="height:30px;line-height:30px;" )
+            = flash[:password_error]
         %br
         .col-xs-4
         .col-xs-4
