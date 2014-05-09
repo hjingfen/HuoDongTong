@@ -1,0 +1,10 @@
+#luck_draw_setting_flag.no-footer.ng-scope
+  %header
+    %h3活动列表
+    .header-right
+      %button.btn-4(ng-tap="go_create()" ng-disabled="button_disabled")创建活动
+  #wrapper.wrapper.scrollable
+    %ul.list-style-2
+      %li.text-center(ng-repeat="activity_name in activity_names" ng-tap="go_sign_up(activity_name)" style="{{activity_name|background1}}")
+        %a.list-activity-name
+          {{ activity_name }}

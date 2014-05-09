@@ -1,0 +1,13 @@
+.container
+  .row
+    %h1(align="center")
+      活动通
+  .row
+    .login
+      %form(name='user' action="/signin" method="post" )
+        .col-xs-12
+          %input(style="height:100%;width:100%" name='name' type="text" placeholder='请输入账号')
+        %br
+          %input(style="height:100%;width:100%"  name='password' type="password" placeholder='请输入密码')
+        %br
+          %button.btn.btn-default(style="width:40%;margin-left:30%" type="submit" )登录

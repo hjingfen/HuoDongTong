@@ -1,0 +1,16 @@
+#luck_draw_setting_flag.no-footer.ng-scope
+  %header
+    %h3
+      {{bid_name}}报名（{{counts}}人）
+    .header-left
+      %button.btn.btn-primary(ng-tap="go_bid_list()")返回
+    .header-right(ng-switch='start_end')
+      %button.btn.btn-primary(ng-tap ='start_bid_sign_up()' ng-switch-when='start' ng-disabled='button_disabled')开始
+      %button.btn.btn-primary(ng-tap ='end_bid_sign_up()' ng-switch-when='end' ng-disabled='button_disabled')结束
+  #wrapper.wrapper.scrollable
+    .list-style-2
+      %li.clearfix(ng-repeat= "bid_applicant in bid_applicants" style="height:35px" )
+        %a.list-applicant-name
+          {{bid_applicant.name }}
+        %a.list-applicant-phone
+          {{bid_applicant.phone}}

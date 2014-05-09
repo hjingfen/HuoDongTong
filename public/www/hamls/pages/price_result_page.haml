@@ -1,0 +1,56 @@
+#luck_draw_setting_flag.ng-scope
+  %header
+    %h3
+      {{bid_name}}结果（{{counts}}人）
+    .header-left
+      %button.btn.btn-primary(ng-tap="go_bid_list()")返回
+    .header-right
+      %button.btn.btn-primary(ng-tap ="go_price_statistics()")统计
+  #wrapper.wrapper.scrollable
+    .list-style-2
+      %li(ng-repeat="bid_applicant in bid_applicants" style="height:35px")
+        %a.list-applicant-name
+          {{bid_applicant.name}}&nbsp&nbsp&nbsp{{bid_applicant.phone}}
+        %a.list-applicant-phone
+          {{"￥"+bid_applicant.price}}
+  %div(id="bid_success" class="modal hide fade in")
+    .modal-header
+      .button.close(data-dismiss="modal" style="float:right" )x
+    .modal-body(style="text-align:center")
+      {{winner.name}}&nbsp{{"￥"+winner.price}}&nbsp{{winner.phone}}
+      .center
+        竞价成功!
+  %div(id="bid_fail" class="modal hide fade in" )
+    .modal-header
+      .button.close(data-dismiss="modal" style="float:right")x
+    .modal-body(style="text-align:center" )
+      .center
+        竞价失败！
+  %footer
+    %center
+      %div.result(ng-show='show_success')
+        竞价结果：{{winner.name}}&nbsp&nbsp{{"￥"+winner.price}}&nbsp&nbsp{{winner.phone}}
+      %div.result(ng-show='show_fail')
+        竞价失败！
+
+-#  %footer
+-#    %center
+-#      %div.result(ng-show='show_success')
+-#        竞价结果：{{winner.name}}&nbsp&nbsp{{"￥"+winner.price}}&nbsp&nbsp{{winner.phone}}
+-#      %div.result(ng-show='show_fail')
+-#        竞价失败！
+-#.modal.fade#bid_success(role="dialog" aria-labelledby="myModalLabel" aria-hidden="true")
+-#  .modal-dia
+-#    .modal-content
+-#      .modal-header
+-#        %button(type="button" class="close" data-dismiss="modal" aria-hidden="true") &times;
+-#      .modal-body(style="font-size:25px")
+-#        {{winner.name}}&nbsp{{"￥"+winner.price}}&nbsp{{winner.phone}}&nbsp竞价成功！
+-#.modal.fade#bid_fail(role="dialog" aria-labelledby="myModalLabel" aria-hidden="true")
+-#  .modal-dia
+-#    .modal-content
+-#      .modal-header
+-#        %button(type="button" class="close" data-dismiss="modal" aria-hidden="true") &times;
+-#      .modal-body(style="font-size:25px")
+-#        竞价失败！
+

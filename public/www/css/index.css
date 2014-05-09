@@ -1,0 +1,40 @@
+.list-applicant-name{
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    font-size: 25px;
+}
+.list-applicant-phone{
+    float: right;
+    height: 30px;
+    line-height: 30px;
+    font-size: 25px;
+}
+.list-activity-name{
+    height: 30px;
+    line-height: 30px;
+    font-size: 28px;
+}
+.result{
+    height:35px;
+    line-height:35px;
+    font-size:33px
+}
+
+.login{
+    display: block;
+    background: #F5F5F5;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 8px 8px auto;
+    padding: 50px 20px 20px;
+}
+
+.row {
+    margin-left: 0px;
+}
+
+body {
+    padding-left: 0px;
+    padding-right: 0px;
+}

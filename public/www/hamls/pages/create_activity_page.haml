@@ -1,0 +1,12 @@
+#luck_draw_setting_flag.no-footer.ng-scope
+%header
+  %h3创建活动
+  .header-left
+    %button.btn.btn-primary(ng-show="return_show" ng-tap="go_list()")返回
+#wrapper.wrapper.scrollable
+  %br
+  %h3活动名称
+  %input(type="text" ng-model="activity_name" style="height:38px" ng-change="listen_text()" class="input-full" )
+  #test(style="color:red" ng-show='tip')活动名称重复！
+  %br
+  %button.btn.btn-2(style="width:100%" ng-disabled="button_disabled"  ng-tap="click_create()")创建
