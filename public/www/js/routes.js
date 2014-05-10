@@ -16,22 +16,23 @@ myModule.config(function($routeProvider) {
     }).when("/create", {
         templateUrl: "pages/create_activity_page.html",
         controller: CreateActivityController
-    }).when("/sign_up", {
-            templateUrl: "pages/activity_sign_up_page.html",
-            controller: ActivitySignUpController
-    }).when("/bid_list", {
-            templateUrl:"pages/bid_list_page.html",
-            controller:BidListController
-    }).when("/bid_sign_up", {
-            templateUrl:"pages/bid_sign_up_page.html",
-            controller:BidSignUpController
-    }).when("/price_result", {
-            templateUrl:"pages/price_result_page.html",
-            controller:PriceResultController
-    }).when("/price_statistics", {
-            templateUrl:"pages/price_statistics_page.html",
-            controller:PriceStatisticsController
-        })
+    })
+//        .when("/sign_up", {
+//            templateUrl: "pages/activity_sign_up_page.html",
+//            controller: ActivitySignUpController
+//    }).when("/bid_list", {
+//            templateUrl:"pages/bid_list_page.html",
+//            controller:BidListController
+//    }).when("/bid_sign_up", {
+//            templateUrl:"pages/bid_sign_up_page.html",
+//            controller:BidSignUpController
+//    }).when("/price_result", {
+//            templateUrl:"pages/price_result_page.html",
+//            controller:PriceResultController
+//    }).when("/price_statistics", {
+//            templateUrl:"pages/price_statistics_page.html",
+//            controller:PriceStatisticsController
+//        })
 
 //        .otherwise({
 //            redirectTo: "/"

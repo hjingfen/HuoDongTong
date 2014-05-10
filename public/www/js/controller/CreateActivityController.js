@@ -10,7 +10,8 @@ function CreateActivityController($scope, $navigate) {
             return;
         }
         Activity.save($scope.activity_name);
-        $navigate.go('/sign_up');
+//        $navigate.go('/sign_up');
+        $navigate.go('/list');
     }
 
     $scope.listen_text = function () {

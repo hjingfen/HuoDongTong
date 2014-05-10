@@ -5,7 +5,7 @@ function ActivityListController($scope,$navigate){
 
     $scope.go_sign_up = function(activity_name){
         Activity.save_displayed_activity(activity_name)
-        $navigate.go('/sign_up');
+//        $navigate.go('/sign_up');
     }
 
     $scope.activity_names = Activity.names();
