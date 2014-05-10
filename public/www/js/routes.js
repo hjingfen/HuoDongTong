@@ -16,7 +16,7 @@ myModule.config(function($routeProvider) {
     }).when("/create", {
         templateUrl: "pages/create_activity_page.html",
         controller: CreateActivityController
-    }) .when("/sign_up", {
+    }).when("/sign_up", {
             templateUrl: "pages/activity_sign_up_page.html",
             controller: ActivitySignUpController
     }).when("/bid_list", {

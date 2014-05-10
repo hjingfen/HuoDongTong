@@ -4,10 +4,12 @@
       活动通
   .row
     .login
-      %form(name='user' action="/signin" method="post" )
+      %form
         .col-xs-12
-          %input(style="height:100%;width:100%" name='name' type="text" placeholder='请输入账号')
+          %input(style="height:100%;width:100%" ng-model="user_name" type="text" placeholder='请输入账号')
         %br
-          %input(style="height:100%;width:100%"  name='password' type="password" placeholder='请输入密码')
+          %input(style="height:100%;width:100%"  ng-model="password" type="password" placeholder='请输入密码')
         %br
-          %button.btn.btn-default(style="width:40%;margin-left:30%" type="submit" )登录
+        #login_test(style="color:red; margin-left:30% " ng-show='login_tip')用户名或密码错误！
+        %br
+          %button.btn.btn-default(style="width:40%;margin-left:30%" type="submit" ng-tap="user_login()" )登录
