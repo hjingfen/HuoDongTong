@@ -26,4 +26,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def phone_login
+    user = User.find_by(:name => params['user_name'], :password => params['password'])
+    if user.present?
+      session[:user_id] = user.id
+      respond_to do |format|
+      format.json { render json: 'true' }
+      end
+    end
+  end
+
 end

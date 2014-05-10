@@ -64,9 +64,6 @@ class SessionController < ApplicationController
 
   def save_password
     user = User.find_by(:id => session[:user_id])
-    p '==============='
-    p user
-    p '==========='
     user.password = params[:password]
     user.save
     redirect_to :controller => :users, :action => :welcome

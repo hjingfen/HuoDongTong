@@ -5,7 +5,8 @@ function LoginController($scope,$navigate){
             type:'POST',
             data:{user_name:$scope.user_name, password:$scope.password},
             success: function() {
-                $navigate.go('/list')
+                localStorage.setItem('current_user',$scope.user_name);
+                $navigate.go('/list');
             },
             error:function(){
                 $scope.login_tip = true;

@@ -41,7 +41,7 @@ class AdminController < ApplicationController
   end
 
   def save_password
-    user = User.find_by(:id =>params[:id])
+    user = User.find_by(:id => params[:id])
     user.password = params[:password]
     user.save
     render :text => 'ok'
