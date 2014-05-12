@@ -36,4 +36,24 @@ class UsersController < ApplicationController
     end
   end
 
+  def user_index
+    session[:a] = params[:page] ? params[:page].to_i : 1
+    @admin_name = User.find(session[:user_id]).name
+  end
+
+  def bidding_list
+    @admin_name = User.find(session[:user_id]).name
+  end
+
+  def sign_up_list
+    @admin_name = User.find(session[:user_id]).name
+  end
+
+  def bidding_detail
+    @admin_name = User.find(session[:user_id]).name
+  end
+
+  def price_statistics
+    @admin_name = User.find(session[:user_id]).name
+  end
 end

@@ -1,0 +1,32 @@
+.container
+  .row(style="width:1320px;" )
+    .col-xs-3(style="padding-left:45px" )
+      %h1活动通
+    .col-xs-9(style="margin-top:20px; text-align:right" )
+      你好,
+      = @admin_name
+      %a(style="text-decoration:none" href="/signout" )退出
+%ol.breadcrumb(style="padding-left:52px" )
+  %li
+    %a(style="text-decoration:none" href="/users/user_index" )
+      首页
+  %li
+    %a(style="text-decoration:none" href="/users/bidding_list" ) 竞价列表
+  %li.active 例如是：第一次竞价
+.container(style="width:100%" )
+  .row(style="background-color:#f5f5f5;height:100px" )
+    %h4(align='center') 获胜者：
+    %h4(align='center') 出价：
+    %h4(align='center') 手机号：
+  .row(style="padding:25px 50px" )
+    %ul.nav.nav-tabs.nav-justified
+      %li.active
+        %a(href=" ")出价列表
+      %li
+        %a(href=" ")价格统计
+    .panel.panel-default
+      %table.table(style="text-align:center" )
+        %thead
+          %tr
+            %th.text-center 价格/元
+            %th.text-center 人数

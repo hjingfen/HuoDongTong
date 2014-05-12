@@ -40,6 +40,16 @@ Rails.application.routes.draw do
 
   post '/phone_login' => 'users#phone_login'
 
+  get '/users/user_index' => 'users#user_index'
+
+  get '/users/bidding_list' => 'users#bidding_list'
+
+  get '/users/sign_up_list' => 'users#sign_up_list'
+
+  get '/users/bidding_detail' => 'users#bidding_detail'
+
+  get '/users/price_statistics' => 'users#price_statistics'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

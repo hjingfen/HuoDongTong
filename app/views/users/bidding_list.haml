@@ -1,0 +1,27 @@
+.container
+  .row(style="width:1320px;" )
+    .col-xs-3(style="padding-left:45px" )
+      %h1活动通
+    .col-xs-9(style="margin-top:20px; text-align:right" )
+      你好,
+      = @admin_name
+      %a(style="text-decoration:none" href="/signout" )退出
+%ol.breadcrumb(style="padding-left:52px" )
+  %li
+    %a(style="text-decoration:none" href="/users/user_index" )
+      首页
+  %li.active 竞价列表
+.container
+  .row(style="width:1320px;")
+    .col-xs-12(style="padding-left:55px" )
+      .panel.panel-default
+        .panel-heading(style="padding:2px 15px" )
+          %h4
+            竞价列表
+            %a(style="text-decoration:none;font-size:14px;float:right" href="/users/sign_up_list")报名列表
+        %table.table(style="text-align:center" )
+          %thead
+            %tr
+              %th.text-center 编号
+              %th.text-center 名称
+              %th.text-center 参与人数
