@@ -15,4 +15,8 @@ function ActivityListController($scope,$navigate){
     if($scope.activity_names.length == 0){
         $navigate.go('/create');
     }
+
+    $scope.synchronize = function(){
+
+    }
 }

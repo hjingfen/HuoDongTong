@@ -1,6 +1,8 @@
 #luck_draw_setting_flag.no-footer.ng-scope
   %header
     %h3活动列表
+    .header-left
+      %button.btn-4(ng-tap="synchronize()" )同步
     .header-right
       %button.btn-4(ng-tap="go_create()" ng-disabled="button_disabled")创建活动
   #wrapper.wrapper.scrollable
