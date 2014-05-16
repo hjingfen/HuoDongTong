@@ -32,6 +32,12 @@ myModule.directive('ngTap', function() {
 
 var native_access;
 $(document).ready(function () {
+    localStorage.actity_ids = localStorage.actity_ids || "[]";
+    localStorage.activities = localStorage.activities || "[]";
+    localStorage.sign_ups = localStorage.sign_ups || "[]";
+    localStorage.bids = localStorage.bids || "[]";
+    localStorage.biddings = localStorage.biddings || "[]";
+
     localStorage.started_activity = localStorage.started_activity || '';
     localStorage.started_bid_activity = localStorage.started_bid_activity || '';
     localStorage.bidding_started_activity = localStorage.bidding_started_activity || '';
