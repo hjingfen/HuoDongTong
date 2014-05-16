@@ -31,7 +31,11 @@ class UsersController < ApplicationController
     if user.present?
       session[:user_id] = user.id
       respond_to do |format|
-      format.json { render json: 'true' }
+        format.json { render json: 'true' }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: 'false' }
       end
     end
   end
