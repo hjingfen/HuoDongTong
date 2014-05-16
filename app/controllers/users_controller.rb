@@ -30,13 +30,9 @@ class UsersController < ApplicationController
     user = User.find_by(:name => params['user_name'], :password => params['password'])
     if user.present?
       session[:user_id] = user.id
-      respond_to do |format|
-        format.json { render json: 'true' }
-      end
+      render :text => 'true'
     else
-      respond_to do |format|
-        format.json { render json: 'false' }
-      end
+      render :text => 'false'
     end
   end
 
