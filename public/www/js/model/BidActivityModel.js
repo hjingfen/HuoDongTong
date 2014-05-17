@@ -23,7 +23,7 @@ BidActivity.continue = function(){
     var user_name = localStorage.current_user;
     var activity_name = localStorage.displayed_activity;
     _.find(sign_ups,function(sign_up){
-        return sign_up.status = sign_up.user_name == user_name && sign_up.activity_name == activity_name ? 'continue' : sign_up.status;
+        return sign_up.status = sign_up.user_name == user_name && sign_up.activity_name == activity_name ? 'continue':sign_up.status;
     })
     localStorage.setItem('sign_ups',JSON.stringify(sign_ups));
 }
@@ -34,10 +34,8 @@ BidActivity.can_not_create_bid_activity = function(){
 
 BidActivity.bidding_names = function(){
     var bids = JSON.parse(localStorage.bids);
-    var user_name = localStorage.current_user;
-    var activity_name = localStorage.displayed_activity;
     var current_activity = _.filter(bids,function(bid){
-        return bid.user_name == user_name && bid.activity_name == activity_name;
+        return bid.user_name == localStorage.current_user && bid.activity_name == localStorage.displayed_activity;
     })
     return _.map(current_activity,function(c){
         return c.name;

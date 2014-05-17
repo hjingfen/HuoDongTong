@@ -34,10 +34,8 @@ SignUp.get_status = function(){
 
 SignUp.end_sign_up = function(){
     var sign_ups = JSON.parse(localStorage.sign_ups);
-    var activity_name = localStorage.displayed_activity;
-    var user_name = localStorage.current_user;
     _.find(sign_ups,function(sign_up){
-        sign_up.status = sign_up.user_name == user_name && sign_up.activity_name == activity_name ? 'end':sign_up.status;
+        sign_up.status = sign_up.user_name == localStorage.current_user && sign_up.activity_name == localStorage.displayed_activity ? 'end':sign_up.status;
     })
     localStorage.ended_activity = localStorage.started_activity;
     localStorage.started_activity = '';
@@ -46,22 +44,18 @@ SignUp.end_sign_up = function(){
 
 SignUp.start_sign_up = function(){
     var sign_ups = JSON.parse(localStorage.sign_ups);
-    var activity_name = localStorage.displayed_activity;
-    var user_name = localStorage.current_user;
     _.find(sign_ups,function(sign_up){
-        sign_up.status = sign_up.user_name == user_name && sign_up.activity_name == activity_name ? 'start':sign_up.status;
+        sign_up.status = sign_up.user_name == localStorage.current_user && sign_up.activity_name == localStorage.displayed_activity ? 'start':sign_up.status;
     })
-    localStorage.started_activity = activity_name;
+    localStorage.started_activity = localStorage.displayed_activity;
     localStorage.setItem('sign_ups',JSON.stringify(sign_ups));
 }
 
 SignUp.save_applicants = function(json_message){
     var applicant = SignUp.sms(json_message);
     var sign_ups = JSON.parse(localStorage.sign_ups);
-    var activity_name = localStorage.displayed_activity;
-    var user_name = localStorage.current_user;
     _.find(sign_ups,function(sign_up){
-        sign_up.user_name == user_name && sign_up.activity_name == activity_name ? sign_up.applicants.unshift(applicant):'';
+        sign_up.user_name == localStorage.current_user && sign_up.activity_name == localStorage.displayed_activity ? sign_up.applicants.unshift(applicant):'';
     })
     localStorage.setItem('sign_ups',JSON.stringify(sign_ups));
 }
