@@ -3,23 +3,22 @@ function SignUp(name,phone){
     this.phone = phone;
 }
 
-SignUp.count = function(){
+SignUp.current_sign_up = function(){
     var sign_ups = JSON.parse(localStorage.sign_ups);
     var activity_name = localStorage.displayed_activity;
     var user_name = localStorage.current_user;
-    var current_applicants = _.find(sign_ups,function(sign_up){
+    return _.find(sign_ups,function(sign_up){
         return sign_up.user_name == user_name && sign_up.activity_name == activity_name;
     })
+}
+
+SignUp.count = function(){
+    var current_applicants = SignUp.current_sign_up();
     return current_applicants.applicants.length;
 }
 
 SignUp.applicants = function(){
-    var sign_ups = JSON.parse(localStorage.sign_ups);
-    var activity_name = localStorage.displayed_activity;
-    var user_name = localStorage.current_user;
-    var current_applicants = _.find(sign_ups,function(sign_up){
-        return sign_up.user_name == user_name && sign_up.activity_name == activity_name;
-    })
+    var current_applicants = SignUp.current_sign_up();
     return current_applicants.applicants;
 }
 
@@ -28,12 +27,7 @@ SignUp.Is_button_disabled = function(){
 }
 
 SignUp.get_status = function(){
-    var sign_ups = JSON.parse(localStorage.sign_ups);
-    var activity_name = localStorage.displayed_activity;
-    var user_name = localStorage.current_user;
-    var current_applicants = _.find(sign_ups,function(sign_up){
-        return sign_up.user_name == user_name && sign_up.activity_name == activity_name;
-    })
+    var current_applicants = SignUp.current_sign_up();
     return current_applicants.status;
 }
 
@@ -60,22 +54,30 @@ SignUp.start_sign_up = function(){
     localStorage.setItem('sign_ups',JSON.stringify(sign_ups));
 }
 
-SignUp.process_sign_up_sms = function(json_message){
+SignUp.save_applicants = function(json_message){
+    var applicant = SignUp.sms(json_message);
     var sign_ups = JSON.parse(localStorage.sign_ups);
     var activity_name = localStorage.displayed_activity;
     var user_name = localStorage.current_user;
-    var applicant = SignUp.sms(json_message);
-    var phone = json_message.messages[0].phone;
-    var sign_up = _.find(sign_ups,function(s){
-        return s.user_name == user_name && s.activity_name == activity_name;
+    _.find(sign_ups,function(sign_up){
+        sign_up.user_name == user_name && sign_up.activity_name == activity_name ? sign_up.applicants.unshift(applicant):'';
     })
-    var is_sign_up = SignUp.is_sign_up(sign_up,applicant);
+    localStorage.setItem('sign_ups',JSON.stringify(sign_ups));
+}
+
+SignUp.sms = function(json_message){
+    var name = json_message.messages[0].message.replace(/\s||\S/g,'').toLocaleLowerCase().replace(/^bm/,'');
+    var phone = json_message.messages[0].phone;
+    var applicant = new SignUp(name,phone);
+    return applicant;
+}
+
+SignUp.process_sign_up_sms = function(json_message){
+    var phone = json_message.messages[0].phone;
+    var is_sign_up = SignUp.is_sign_up(json_message);
     if(SignUp.get_status() == 'start'){
         if(is_sign_up){
-            _.find(sign_ups,function(sign_up){
-                sign_up.user_name == user_name && sign_up.activity_name == activity_name ? sign_up.applicants.unshift(applicant):'';
-            })
-            localStorage.setItem('sign_ups',JSON.stringify(sign_ups));
+            SignUp.save_applicants(json_message)
             AfterReceiveSms1.run_after_apply();
             native_accessor.send_sms(phone,'恭喜您报名成功！');
             return;
@@ -90,13 +92,9 @@ SignUp.process_sign_up_sms = function(json_message){
     }
 }
 
-SignUp.sms = function(json_message){
-    var name = json_message.messages[0].message.replace(/\s||\S/g,'').toLocaleLowerCase().replace(/^bm/,'');
-    var phone = json_message.messages[0].phone;
-    var applicant = new SignUp(name,phone);
-    return applicant;
-}
-SignUp.is_sign_up = function(sign_up,applicant){
+SignUp.is_sign_up = function(json_message){
+    var applicant = SignUp.sms(json_message)
+    var sign_up = SignUp.current_sign_up();
     return (_.find(sign_up.applicants,function(app){
         return app.phone == applicant.phone}) == undefined) && sign_up.status == 'start';
 }
