@@ -8,26 +8,25 @@ var native_accessor = {
         if (typeof this.process_received_message === 'function') {
             this.process_received_message(json_message);
         }
+    },
+
+    process_received_message:function(json_message){
+        var first_two_characters = json_message.messages[0].message.substr(0,2);
+        var judge_sms = {
+            bm: function () {
+                SignUp.process_sign_up_sms(json_message);
+            },
+            jj:function(){
+//                Bidding.process_bidding_sms(json_message);
+            }
+        }
+        if (judge_sms[first_two_characters]) {
+            judge_sms[first_two_characters]();
+        }
     }
 
 //    process_received_message:function(json_message){
 //        var phone = json_message.messages[0].phone;
-//        if(Process_received_message.Is_bm(json_message)){
-//            if(SignUp.get_status() == 'start'){
-//                if(Process_received_message.no_repeat_activity(json_message)){
-//                    Process_received_message.save_applicant(json_message);
-//                    native_accessor.send_sms(phone,'恭喜您报名成功！');
-//                    return;
-//                }
-//                native_accessor.send_sms(phone,'您已报名成功，请勿重复报名！');
-//            }
-//            if(SignUp.get_status() == 'un_start'|| SignUp.get_status() == 'continue'){
-//                native_accessor.send_sms(phone,"活动尚未开始，请稍后！")
-//            }
-//            if(SignUp.get_status() == 'end'){
-//                native_accessor.send_sms(phone,"抱歉！活动已结束。")
-//            }
-//        }
 //        if(Process_received_message.Is_JJ_num(json_message)){
 //            if(!(Process_received_message.had_sign_up(json_message))){
 //                if(BidSignUp.get_bid_status() == 'start'){
@@ -54,9 +53,9 @@ var native_accessor = {
 //    }
 }
 
-//function notify_message_received(message_json) {
+function notify_message_received(message_json) {
 //    console.log(JSON.stringify(message_json));
     //alert(JSON.stringify(message_json.messages));
-//    native_accessor.receive_message(message_json);//这个应该有
-//}
+    native_accessor.receive_message(message_json);
+}
 //phone_number=message_json.messages[0].ph

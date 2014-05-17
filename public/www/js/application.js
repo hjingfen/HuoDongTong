@@ -37,6 +37,7 @@ $(document).ready(function () {
     localStorage.sign_ups = localStorage.sign_ups || "[]";
     localStorage.bids = localStorage.bids || "[]";
     localStorage.biddings = localStorage.biddings || "[]";
+    localStorage.ended_activity = localStorage.ended_activity || '';
 
     localStorage.started_activity = localStorage.started_activity || '';
     localStorage.started_bid_activity = localStorage.started_bid_activity || '';

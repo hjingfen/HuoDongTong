@@ -9,6 +9,18 @@ Activity.save = function(activity_name){
     localStorage.displayed_activity = activity_name;
     activities.push(activity);
     localStorage.setItem('activities',JSON.stringify(activities));
+    Activity.create_sign_ups(activity_name);
+}
+
+Activity.create_sign_ups = function(activity_name){
+    var sign_ups = JSON.parse(localStorage.getItem('sign_ups'));
+    var sign_up = {};
+    sign_up.status = 'un_start';
+    sign_up.user_name = localStorage.current_user;
+    sign_up.activity_name = activity_name;
+    sign_up.applicants = [];
+    sign_ups.unshift(sign_up);
+    localStorage.setItem('sign_ups',JSON.stringify(sign_ups));
 }
 
 Activity.check = function(activity_name){
