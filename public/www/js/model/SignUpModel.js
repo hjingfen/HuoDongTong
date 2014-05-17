@@ -13,13 +13,14 @@ SignUp.current_sign_up = function(){
 }
 
 SignUp.count = function(){
-    var current_applicants = SignUp.current_sign_up();
-    return current_applicants.applicants.length;
+    var current_sign_up = SignUp.current_sign_up();
+    localStorage.setItem('sign_up_count',current_sign_up.applicants.length);
+    return current_sign_up.applicants.length;
 }
 
 SignUp.applicants = function(){
-    var current_applicants = SignUp.current_sign_up();
-    return current_applicants.applicants;
+    var current_sign_up = SignUp.current_sign_up();
+    return current_sign_up.applicants;
 }
 
 SignUp.Is_button_disabled = function(){
@@ -27,8 +28,8 @@ SignUp.Is_button_disabled = function(){
 }
 
 SignUp.get_status = function(){
-    var current_applicants = SignUp.current_sign_up();
-    return current_applicants.status;
+    var current_sign_up = SignUp.current_sign_up();
+    return current_sign_up.status;
 }
 
 SignUp.end_sign_up = function(){

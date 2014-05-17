@@ -23,9 +23,9 @@ myModule.config(function($routeProvider) {
         redirectTo: '/'
     });
 
-//    }).when("/bid_list", {
-//            templateUrl:"pages/bid_list_page.html",
-//            controller:BidListController
+    }).when("/bid_list", {
+            templateUrl:"pages/bid_list_page.html",
+            controller:BidListController
 //    }).when("/bid_sign_up", {
 //            templateUrl:"pages/bid_sign_up_page.html",
 //            controller:BidSignUpController
