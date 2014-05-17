@@ -22,13 +22,13 @@ myModule.config(function($routeProvider) {
     }).when("/bid_list", {
         templateUrl:"pages/bid_list_page.html",
         controller:BidListController
-    })
+    }).when("/bid_sign_up", {
+            templateUrl:"pages/bid_sign_up_page.html",
+            controller:BidSignUpController
+        })
 
 
-//    }).when("/bid_sign_up", {
-//            templateUrl:"pages/bid_sign_up_page.html",
-//            controller:BidSignUpController
-//    }).when("/price_result", {
+//    .when("/price_result", {
 //            templateUrl:"pages/price_result_page.html",
 //            controller:PriceResultController
 //    }).when("/price_statistics", {

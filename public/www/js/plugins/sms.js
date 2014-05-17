@@ -17,40 +17,13 @@ var native_accessor = {
                 SignUp.process_sign_up_sms(json_message);
             },
             jj:function(){
-//                Bidding.process_bidding_sms(json_message);
+                BidSignUp.process_bidding_sms(json_message);
             }
         }
         if (judge_sms[first_two_characters]) {
             judge_sms[first_two_characters]();
         }
     }
-
-//    process_received_message:function(json_message){
-//        var phone = json_message.messages[0].phone;
-//        if(Process_received_message.Is_JJ_num(json_message)){
-//            if(!(Process_received_message.had_sign_up(json_message))){
-//                if(BidSignUp.get_bid_status() == 'start'){
-//                    if(Process_received_message.no_repeat_bid_activity(json_message)){
-//                        Process_received_message.save_bid_applicant(json_message);
-//                        native_accessor.send_sms(phone,'恭喜竞价成功！');
-//                        return;
-//                    }
-//                    native_accessor.send_sms(phone,'您已竞价成功，请勿重复竞价！');
-//                    return;
-//                }
-//                if(BidSignUp.get_bid_status() == 'un_start'){
-//                    native_accessor.send_sms(phone,"竞价尚未开始，请稍后！");
-//                    return;
-//                }
-//                if(BidSignUp.get_bid_status() == 'end'){
-//                    native_accessor.send_sms(phone,'抱歉！活动已结束。')
-//                }
-//            }
-//            if(Process_received_message.had_sign_up(json_message)){
-//                native_accessor.send_sms(phone,'对不起！您没有报名此次活动。')
-//            }
-//        }
-//    }
 }
 
 function notify_message_received(message_json) {

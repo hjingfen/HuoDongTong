@@ -1,6 +1,6 @@
 function BidActivity(){
     this.status = 'un_start';
-    this.biddings = [];
+    this.bid_applicants = [];
     this.user_name = localStorage.current_user;
     this.activity_name = localStorage.ended_activity;
 }
@@ -10,6 +10,7 @@ BidActivity.save_bid_activity = function(){
     var bid = new BidActivity;
     bid['name'] = "竞价"+(bids.length+1);
     bids.push(bid);
+    localStorage.setItem('displayed_bid_activity', bid.name);
     localStorage.setItem('bids',JSON.stringify(bids));
 }
 
@@ -43,6 +44,6 @@ BidActivity.bidding_names = function(){
     })
 }
 
-BidActivity.save_displayed_bid_activity = function(bidding_name){
-    localStorage.setItem('displayed_bid_activity',bidding_name);
-}
+BidActivity.save_displayed_bid_activity = function (bid_name) {
+    localStorage.setItem('displayed_bid_activity', bid_name);
+};
