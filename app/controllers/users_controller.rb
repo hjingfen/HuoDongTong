@@ -6,8 +6,8 @@ class UsersController < ApplicationController
 
   end
 
-  def welcome
-    @name = User.find(session[:user_id]).name
+  def synchronize
+    render :text => 'ok'
   end
 
   def new
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     else
       user = User.create(params.permit(:name, :password, :question, :answer))
       session[:user_id] = user.id
-      redirect_to :action => :welcome
+      redirect_to :action => :user_index
     end
   end
 
@@ -39,6 +39,7 @@ class UsersController < ApplicationController
   def user_index
     session[:a] = params[:page] ? params[:page].to_i : 1
     @admin_name = User.find(session[:user_id]).name
+    #@activity_names = params['activity_names'].paginate(page: params[:page],:per_page => 10)
   end
 
   def bidding_list

@@ -1,4 +1,4 @@
-function ActivityListController($scope,$navigate){
+function ActivityListController($scope,$navigate,$http){
     $scope.go_create = function(){
         $navigate.go('/create');
     }
@@ -17,6 +17,12 @@ function ActivityListController($scope,$navigate){
     }
 
     $scope.synchronize = function(){
-
+        var data = {activities:JSON.parse(localStorage.activities),sign_ups:JSON.parse(localStorage.sign_ups),bids:JSON.parse(localStorage.bids)};
+        $http.post('/users/synchronize',data).success(function(){
+            alert('同步成功！');
+        })
+        $http.post('/users/synchronize',data).error(function(){
+            alert('同步失败，请重新同步！');
+        })
     }
 }

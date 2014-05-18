@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   get '/users/new' => 'users#new'
 
-  get '/users/welcome' => 'users#welcome'
+  post '/users/synchronize' => 'users#synchronize'
 
   post '/users/create' => 'users#create'
 

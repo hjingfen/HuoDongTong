@@ -12,7 +12,7 @@ class SessionController < ApplicationController
       redirect_to :controller => :admin, :action => :welcome
     elsif user
       session[:user_id] = user.id
-      redirect_to :controller => :users, :action => :welcome
+      redirect_to :controller => :users, :action => :user_index
     else
       flash[:signin_error]='用户名不存在或密码错误！'
       redirect_to :action => :index
@@ -66,6 +66,6 @@ class SessionController < ApplicationController
     user = User.find_by(:id => session[:user_id])
     user.password = params[:password]
     user.save
-    redirect_to :controller => :users, :action => :welcome
+    redirect_to :controller => :users, :action => :user_index
   end
 end
