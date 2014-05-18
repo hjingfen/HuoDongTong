@@ -20,11 +20,10 @@ BidSignUp.bid_applicants = function(){
 
 BidSignUp.current_bid = function(){
     var bids = JSON.parse(localStorage.bids);
-    var user_name = localStorage.current_user;
     var activity_name = localStorage.displayed_activity;
     var bid_name = localStorage.displayed_bid_activity;
     return _.find(bids,function(bid){
-        return bid.user_name == user_name && bid.activity_name == activity_name && bid.name == bid_name;
+        return bid.user_name == localStorage.current_user && bid.activity_name == activity_name && bid.name == bid_name;
     })
 }
 
@@ -37,14 +36,19 @@ BidSignUp.Is_button_disabled = function(){
     return localStorage.started_bid_activity != localStorage.displayed_bid_activity && localStorage.started_bid_activity;
 }
 
-BidSignUp.end_bid_sign_up = function(){
-    var bids = JSON.parse(localStorage.bids);
+BidSignUp.current_bid_info = function(bids){
     var user_name = localStorage.current_user;
     var activity_name = localStorage.displayed_activity;
     var bid_name = localStorage.displayed_bid_activity;
-    var current_bid = _.find(bids,function(bid){
+    return _.find(bids,function(bid){
         return bid.user_name == user_name && bid.activity_name == activity_name && bid.name == bid_name;
     })
+
+}
+
+BidSignUp.end_bid_sign_up = function(){
+    var bids = JSON.parse(localStorage.bids);
+    var current_bid = BidSignUp.current_bid_info(bids);
     current_bid.status = 'end';
     localStorage.ended_bid_activity = localStorage.started_bid_activity;
     localStorage.started_bid_activity = '';
@@ -54,12 +58,7 @@ BidSignUp.end_bid_sign_up = function(){
 
 BidSignUp.start_bid_sign_up = function(){
     var bids = JSON.parse(localStorage.bids);
-    var user_name = localStorage.current_user;
-    var activity_name = localStorage.displayed_activity;
-    var bid_name = localStorage.displayed_bid_activity;
-    var current_bid = _.find(bids,function(bid){
-        return bid.user_name == user_name && bid.activity_name == activity_name && bid.name == bid_name;
-    })
+    var current_bid = BidSignUp.current_bid_info(bids);
     current_bid.status = 'start';
     localStorage.started_bid_activity = current_bid.name;//开始的竞价活动
     localStorage.bidding_started_activity = localStorage.ended_activity;//开始竞价的活动
@@ -74,12 +73,7 @@ BidSignUp.save_bid_applicant = function(json_message){
     })
     bid_applicant['name'] = applicant.name;
     var bids = JSON.parse(localStorage.bids);
-    var user_name = localStorage.current_user;
-    var activity_name = localStorage.displayed_activity;
-    var bid_name = localStorage.displayed_bid_activity;
-    var current_bid = _.find(bids,function(bid){
-        return bid.user_name == user_name && bid.activity_name == activity_name && bid.name == bid_name;
-    })
+    var current_bid = BidSignUp.current_bid_info(bids);
     current_bid.bid_applicants.push(bid_applicant);
     localStorage.setItem('bids',JSON.stringify(bids));
     AfterReceiveSms2.run_after_apply();

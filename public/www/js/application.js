@@ -32,7 +32,6 @@ myModule.directive('ngTap', function() {
 
 var native_access;
 $(document).ready(function () {
-    localStorage.actity_ids = localStorage.actity_ids || "[]";
     localStorage.activities = localStorage.activities || "[]";
     localStorage.sign_ups = localStorage.sign_ups || "[]";
     localStorage.bids = localStorage.bids || "[]";
