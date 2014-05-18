@@ -35,7 +35,7 @@ function BidSignUpController($scope,$navigate){
     $scope.end_bid_sign_up = function(){
         if(confirm('确认要结束本次竞价吗？')){
             BidSignUp.end_bid_sign_up();
-//            $navigate.go('/price_result');
+            $navigate.go('/price_result');
         }
     }
 

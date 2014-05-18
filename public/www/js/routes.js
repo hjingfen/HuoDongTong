@@ -25,20 +25,15 @@ myModule.config(function($routeProvider) {
     }).when("/bid_sign_up", {
             templateUrl:"pages/bid_sign_up_page.html",
             controller:BidSignUpController
-        })
-
-
-//    .when("/price_result", {
-//            templateUrl:"pages/price_result_page.html",
-//            controller:PriceResultController
-//    }).when("/price_statistics", {
-//            templateUrl:"pages/price_statistics_page.html",
-//            controller:PriceStatisticsController
-//        })
-
-//        .otherwise({
-//            redirectTo: "/"
-//        });
+    }).when("/price_result", {
+            templateUrl:"pages/price_result_page.html",
+            controller:PriceResultController
+    }).when("/price_statistics", {
+            templateUrl:"pages/price_statistics_page.html",
+            controller:PriceStatisticsController
+    }).otherwise({
+            redirectTo: "/"
+    });
 });
 /** Here is example
 myModule.config(function($routeProvider) {
