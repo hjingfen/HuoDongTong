@@ -38,23 +38,23 @@ class UsersController < ApplicationController
 
   def user_index
     session[:a] = params[:page] ? params[:page].to_i : 1
-    @admin_name = User.find(session[:user_id]).name
+    @user_name = User.find(session[:user_id]).name
     #@activity_names = params['activity_names'].paginate(page: params[:page],:per_page => 10)
   end
 
   def bidding_list
-    @admin_name = User.find(session[:user_id]).name
+    @user_name = User.find(session[:user_id]).name
   end
 
   def sign_up_list
-    @admin_name = User.find(session[:user_id]).name
+    @user_name = User.find(session[:user_id]).name
   end
 
   def bidding_detail
-    @admin_name = User.find(session[:user_id]).name
+    @user_name = User.find(session[:user_id]).name
   end
 
   def price_statistics
-    @admin_name = User.find(session[:user_id]).name
+    @user_name = User.find(session[:user_id]).name
   end
 end

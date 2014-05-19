@@ -54,3 +54,16 @@ Activity.return_show = function(){
     return localStorage.getItem('activities');
 }
 
+Activity.synchronize_to_service = function(){
+    $.ajax({
+        url:'/users/synchronize',
+        type:'POST',
+        data:{user:localStorage.current_user,activities:JSON.parse(localStorage.activities),sign_ups:JSON.parse(localStorage.sign_ups),bids:JSON.parse(localStorage.bids)},
+        success: function () {
+            alert('同步成功！');
+        },
+        error: function () {
+            alert('同步失败，请重新同步！')
+        }
+    })
+}
