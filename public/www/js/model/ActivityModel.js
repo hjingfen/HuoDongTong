@@ -58,7 +58,7 @@ Activity.synchronize_to_service = function(){
     $.ajax({
         url:'/users/synchronize',
         type:'POST',
-        data:{user:localStorage.current_user,activities:JSON.parse(localStorage.activities),sign_ups:JSON.parse(localStorage.sign_ups),bids:JSON.parse(localStorage.bids)},
+        data:{user:localStorage.current_user,activities:JSON.parse(localStorage.activities)},
         success: function () {
             alert('同步成功！');
         },
@@ -66,4 +66,5 @@ Activity.synchronize_to_service = function(){
             alert('同步失败，请重新同步！')
         }
     })
+    console.log(JSON.parse(localStorage.activities),'1111111111111111111111')
 }

@@ -7,6 +7,9 @@ class UsersController < ApplicationController
   end
 
   def synchronize
+    params[:activities].each do |key,value|
+      @activities = Activity.create(:user_name => params[:user],:activity_name => value[:activity_name])
+    end
     render :text => 'ok'
   end
 
@@ -39,7 +42,7 @@ class UsersController < ApplicationController
   def user_index
     session[:a] = params[:page] ? params[:page].to_i : 1
     @user_name = User.find(session[:user_id]).name
-    #@activity_names = params['activity_names'].paginate(page: params[:page],:per_page => 10)
+    @activities = Activity.where(:user_name => @user_name).paginate(page: params[:page],:per_page => 10)
   end
 
   def bidding_list

@@ -20,3 +20,10 @@
               %th.text-center 报名人数
               %th.text-center 竞价次数
           %tbody
+            - a = (session[:a]-1)*10+1
+            - @activities.each do |activity|
+              %tr
+                %td
+                  = a
+                  - a += 1
+                %td= activity.activity_name
