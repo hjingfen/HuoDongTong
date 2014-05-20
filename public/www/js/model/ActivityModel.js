@@ -70,14 +70,24 @@ Activity.user_index = function(){
 }
 
 Activity.bidding_list = function(){
+    var sign_ups = JSON.parse(localStorage.sign_ups);
     var bids = JSON.parse(localStorage.bids);
+    _.each(bids,function(bid){
+        bid['bidding_counts'] = bid.bid_applicants.length;
+        var sign_up = _.find(sign_ups,function(sign_up){
+            return sign_up.activity_name == bid.activity_name && sign_up.user_name == bid.user_name;
+        })
+        bid['sign_up_counts'] = sign_up.applicants.length;
+        return bid;
+    })
+    return bids;
 }
 
 Activity.synchronize_to_service = function(){
     $.ajax({
         url:'/users/synchronize',
         type:'POST',
-        data:{user:localStorage.current_user,activities:Activity.user_index()},
+        data:{user:localStorage.current_user,activities:Activity.user_index(),bid_list:Activity.bidding_list()},
         success: function () {
             alert('同步成功！');
         },

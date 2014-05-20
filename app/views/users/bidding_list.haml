@@ -25,3 +25,18 @@
               %th.text-center 编号
               %th.text-center 名称
               %th.text-center 参与人数
+          %tbody
+            - a = (session[:a]-1)*10+1
+            - @bid_lists.each do |bid|
+              %tr
+                %td
+                  = a
+                  - a += 1
+                %td=bid.bid_name
+                %td
+                  =bid.bidding_counts
+                  ='/'
+                  =bid.sign_up_counts
+  .row(style="width:1305px")
+    .col-xs-12(style="text-align:right" )
+      = will_paginate @bid_lists,:previous_label => '&laquo',:next_label =>'&raquo'
