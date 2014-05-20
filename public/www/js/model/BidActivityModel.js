@@ -8,7 +8,10 @@ function BidActivity(){
 BidActivity.save_bid_activity = function(){
     var bids = JSON.parse(localStorage.bids);
     var bid = new BidActivity;
-    bid['name'] = "竞价"+(bids.length+1);
+    var current_activity_bid = _.filter(bids,function(bid){
+        return bid.user_name == localStorage.current_user && bid.activity_name == localStorage.ended_activity;
+    })
+    bid['name'] = "竞价"+(current_activity_bid.length+1);
     bids.push(bid);
     localStorage.setItem('displayed_bid_activity', bid.name);
     localStorage.setItem('bids',JSON.stringify(bids));
