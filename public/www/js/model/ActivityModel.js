@@ -7,7 +7,7 @@ Activity.save = function(activity_name){
     var activity = new Activity(activity_name);
     activity['current_user'] = localStorage.current_user;
     localStorage.displayed_activity = activity_name;
-    activities.push(activity);
+    activities.unshift(activity);
     localStorage.setItem('activities',JSON.stringify(activities));
     Activity.create_sign_ups(activity_name);
 }
@@ -19,7 +19,7 @@ Activity.create_sign_ups = function(activity_name){
     sign_up.user_name = localStorage.current_user;
     sign_up.activity_name = activity_name;
     sign_up.applicants = [];
-    sign_ups.unshift(sign_up);
+    sign_ups.push(sign_up);
     localStorage.setItem('sign_ups',JSON.stringify(sign_ups));
 }
 
