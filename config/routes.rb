@@ -42,7 +42,7 @@ Rails.application.routes.draw do
 
   get '/users/user_index' => 'users#user_index'
 
-  get '/users/bidding_list' => 'users#bidding_list'
+  get 'bidding_list' => 'users#bidding_list'
 
   get '/users/sign_up_list' => 'users#sign_up_list'
 

@@ -26,7 +26,8 @@
                 %td
                   = a
                   - a += 1
-                %td= activity.activity_name
+                %td
+                  =link_to activity.activity_name,bidding_list_path(:activity_name => activity.activity_name,:user_name => activity.user_name)
                 %td=activity.sign_up_counts
                 %td=activity.bidding_counts
   .row(style="width:1305px")

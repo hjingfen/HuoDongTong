@@ -7,10 +7,7 @@ class UsersController < ApplicationController
   end
 
   def synchronize
-    Activity.delete_all(:user_name => params[:user])
-    params[:activities].each do |key,value|
-      @activities = Activity.create(:user_name => params[:user],:activity_name => value[:activity_name],:sign_up_counts => value[:counts],:bidding_counts => value[:bid_counts])
-    end
+    Activity.update_activities(params[:user],params[:activities])
     render :text => 'ok'
   end
 

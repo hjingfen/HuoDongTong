@@ -69,6 +69,10 @@ Activity.user_index = function(){
 
 }
 
+Activity.bidding_list = function(){
+    var bids = JSON.parse(localStorage.bids);
+}
+
 Activity.synchronize_to_service = function(){
     $.ajax({
         url:'/users/synchronize',
