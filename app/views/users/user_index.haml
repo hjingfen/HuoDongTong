@@ -27,6 +27,8 @@
                   = a
                   - a += 1
                 %td= activity.activity_name
+                %td=activity.sign_up_counts
+                %td=activity.bidding_counts
   .row(style="width:1305px")
     .col-xs-12(style="text-align:right" )
       = will_paginate @activities,:previous_label => '&laquo',:next_label =>'&raquo'

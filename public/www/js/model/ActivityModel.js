@@ -54,11 +54,26 @@ Activity.return_show = function(){
     return localStorage.getItem('activities');
 }
 
+Activity.user_index = function(){
+    var sign_ups = JSON.parse(localStorage.sign_ups);
+    var bids = JSON.parse(localStorage.bids);
+    _.each(sign_ups,function(sign_up){
+        sign_up['counts'] = sign_up.applicants.length;
+        var bid = _.filter(bids,function(bid){
+            return bid.activity_name == sign_up.activity_name && bid.user_name == sign_up.user_name;
+        })
+        sign_up['bid_counts'] = bid.length;
+        return sign_up;
+    })
+    return sign_ups;
+
+}
+
 Activity.synchronize_to_service = function(){
     $.ajax({
         url:'/users/synchronize',
         type:'POST',
-        data:{user:localStorage.current_user,activities:JSON.parse(localStorage.activities)},
+        data:{user:localStorage.current_user,activities:Activity.user_index()},
         success: function () {
             alert('同步成功！');
         },
@@ -66,5 +81,4 @@ Activity.synchronize_to_service = function(){
             alert('同步失败，请重新同步！')
         }
     })
-    console.log(JSON.parse(localStorage.activities),'1111111111111111111111')
 }
