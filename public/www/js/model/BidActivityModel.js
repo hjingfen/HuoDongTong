@@ -25,7 +25,7 @@ BidActivity.continue = function(){
     var sign_ups = JSON.parse(localStorage.sign_ups);
     var user_name = localStorage.current_user;
     var activity_name = localStorage.displayed_activity;
-    _.find(sign_ups,function(sign_up){
+    _.each(sign_ups,function(sign_up){
         return sign_up.status = sign_up.user_name == user_name && sign_up.activity_name == activity_name ? 'continue':sign_up.status;
     })
     localStorage.setItem('sign_ups',JSON.stringify(sign_ups));

@@ -32,7 +32,8 @@
                 %td
                   = a
                   - a += 1
-                %td=bid.bid_name
+                %td
+                  =link_to bid.bid_name,bidding_detail_path(:bid_name => bid.bid_name,:user_name => bid.user_name,:activity_name => bid.activity_name)
                 %td
                   =bid.bidding_counts
                   ='/'

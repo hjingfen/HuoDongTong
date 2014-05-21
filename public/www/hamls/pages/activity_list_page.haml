@@ -2,9 +2,9 @@
   %header
     %h3活动列表
     .header-left
-      %button.btn-4(ng-tap="synchronize()" )同步
+      %button.btn.btn.btn-primary(ng-tap="synchronize()" )同步
     .header-right
-      %button.btn-4(ng-tap="go_create()" ng-disabled="button_disabled")创建活动
+      %button.btn.btn-primary(ng-tap="go_create()" ng-disabled="button_disabled")创建活动
   #wrapper.wrapper.scrollable
     %ul.list-style-2
       %li.text-center(ng-repeat="activity_name in activity_names" ng-tap="go_sign_up(activity_name)" style="{{activity_name|background1}}")
