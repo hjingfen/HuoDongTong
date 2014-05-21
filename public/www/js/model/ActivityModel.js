@@ -95,7 +95,7 @@ Activity.synchronize_to_service = function(){
     $.ajax({
         url:'/users/synchronize',
         type:'POST',
-        data:{user:localStorage.current_user,activities:Activity.user_index(),bid_list:Activity.bidding_list(),sign_up_list:Activity.sign_up_list()},
+        data:{user:localStorage.current_user,activities:Activity.user_index(),bid_list:Activity.bidding_list(),sign_up_list:Activity.sign_up_list(),bid_detail:JSON.parse(localStorage.bids)},
         success: function () {
             alert('同步成功！');
         },

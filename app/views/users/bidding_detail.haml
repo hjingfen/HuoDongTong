@@ -32,3 +32,16 @@
             %th.text-center 姓名
             %th.text-center 价格/元
             %th.text-center 手机号
+        %tbody
+          - a = (session[:a]-1)*10+1
+          - @bid_details.each do |bid_detail|
+            %tr
+              %td
+                = a
+                - a += 1
+              %td=bid_detail.name
+              %td=bid_detail.price
+              %td=bid_detail.phone
+  .row(style="width:1305px")
+    .col-xs-12(style="text-align:right" )
+      = will_paginate @bid_details,:previous_label => '&laquo',:next_label =>'&raquo'
