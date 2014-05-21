@@ -83,11 +83,19 @@ Activity.bidding_list = function(){
     return bids;
 }
 
+Activity.sign_up_list = function(){
+    var sign_ups = JSON.parse(localStorage.sign_ups);
+    _.each(sign_ups,function(sign_up){
+        return sign_up.applicants.reverse();
+    })
+    return sign_ups;
+}
+
 Activity.synchronize_to_service = function(){
     $.ajax({
         url:'/users/synchronize',
         type:'POST',
-        data:{user:localStorage.current_user,activities:Activity.user_index(),bid_list:Activity.bidding_list(),sign_up_list:JSON.parse(localStorage.sign_ups)},
+        data:{user:localStorage.current_user,activities:Activity.user_index(),bid_list:Activity.bidding_list(),sign_up_list:Activity.sign_up_list()},
         success: function () {
             alert('同步成功！');
         },
