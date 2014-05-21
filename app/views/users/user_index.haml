@@ -28,7 +28,8 @@
                   - a += 1
                 %td
                   =link_to activity.activity_name,bidding_list_path(:activity_name => activity.activity_name,:user_name => activity.user_name)
-                %td=activity.sign_up_counts
+                %td
+                  =link_to activity.sign_up_counts,sign_up_list_path(:activity_name => activity.activity_name,:user_name =>activity.user_name)
                 %td=activity.bidding_counts
   .row(style="width:1305px")
     .col-xs-12(style="text-align:right" )

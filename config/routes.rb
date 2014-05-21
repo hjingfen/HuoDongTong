@@ -44,7 +44,7 @@ Rails.application.routes.draw do
 
   get 'bidding_list' => 'users#bidding_list'
 
-  get '/users/sign_up_list' => 'users#sign_up_list'
+  get 'sign_up_list' => 'users#sign_up_list'
 
   get '/users/bidding_detail' => 'users#bidding_detail'
 

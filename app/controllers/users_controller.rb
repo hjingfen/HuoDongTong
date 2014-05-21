@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   def synchronize
     Activity.update_activities(params[:user],params[:activities])
     BiddingList.update_bidding_list(params[:user],params[:bid_list])
+    SignUpList.update_sign_up_list(params[:user],params[:sign_up_list])
     render :text => 'ok'
   end
 
@@ -51,6 +52,7 @@ class UsersController < ApplicationController
 
   def sign_up_list
     @user_name = User.find(session[:user_id]).name
+    @sign_up_lists = SignUpList.where(:activity_name => params[:activity_name]).paginate(page: params[:page],:per_page => 10)
   end
 
   def bidding_detail

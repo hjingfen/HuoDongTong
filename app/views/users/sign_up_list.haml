@@ -25,3 +25,15 @@
               %th.text-center 编号
               %th.text-center 姓名
               %th.text-center 手机号
+          %tbody
+            - a = (session[:a]-1)*10+1
+            - @sign_up_lists.each do |s|
+              %tr
+                %td
+                  = a
+                  - a += 1
+                %td=s.name
+                %td=s.phone
+  .row(style="width:1305px")
+    .col-xs-12(style="text-align:right" )
+      = will_paginate @sign_up_lists,:previous_label => '&laquo',:next_label =>'&raquo'
