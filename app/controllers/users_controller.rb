@@ -59,6 +59,7 @@ class UsersController < ApplicationController
   def bidding_detail
     @user_name = User.find(session[:user_id]).name
     @bid_details = BiddingDetail.where(:activity_name => params[:activity_name],:bid_name => params[:bid_name]).paginate(page: params[:page],:per_page => 10)
+    @bid_name = params[:bid_name]
   end
 
   def price_statistics

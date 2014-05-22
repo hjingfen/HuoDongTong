@@ -4,7 +4,7 @@ class BiddingDetail < ActiveRecord::Base
     bid_detail.each do |key,value|
       if value[:bid_applicants].present?
         value[:bid_applicants].each do |k,val|
-          BiddingDetail.create(:user_name => user,:activity_name => value[:activity_name],:bid_name => value[:name],:name => val[:name],:phone => val[:phone],:price => val[:price])
+          BiddingDetail.create(:user_name => user,:activity_name => value[:activity_name],:bid_name => value[:name],:status => value[:status],:name => val[:name],:phone => val[:phone],:price => val[:price])
         end
       end
     end
