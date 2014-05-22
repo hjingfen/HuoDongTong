@@ -64,6 +64,8 @@ class UsersController < ApplicationController
     @bid_details = BiddingDetail.where(:activity_name => params[:activity_name],:user_name => @user_name,:bid_name => params[:bid_name]).paginate(page: params[:page],:per_page => 10)
     @activity_name = params[:activity_name]
     @bid_name = params[:bid_name]
+    price = BiddingCount.find_by(:activity_name => params[:activity_name],:user_name => @user_name,:bid_name => params[:bid_name],:count => 1).price
+    @winner = BiddingDetail.find_by(:price => price)
   end
 
   def price_statistics
@@ -71,5 +73,7 @@ class UsersController < ApplicationController
     @bidding_counts = BiddingCount.where(:activity_name => params[:activity_name],:user_name => @user_name,:bid_name => params[:bid_name]).paginate(page: params[:page],:per_page => 10)
     @activity_name = params[:activity_name]
     @bid_name = params[:bid_name]
+    price = BiddingCount.find_by(:activity_name => params[:activity_name],:user_name => @user_name,:bid_name => params[:bid_name],:count => 1).price
+    @winner = BiddingDetail.find_by(:price => price)
   end
 end
