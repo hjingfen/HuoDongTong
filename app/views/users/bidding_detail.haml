@@ -25,7 +25,8 @@
       %li.active
         %a 出价列表
       %li
-        %a(href="/users/price_statistics ")价格统计
+        %a
+          =link_to '价格统计',price_statistics_path(:activity_name => @activity_name,:user_name => @user_name,:bid_name => @bid_name)
     .panel.panel-default
       %table.table(style="text-align:center" )
         %thead

@@ -48,7 +48,7 @@ Rails.application.routes.draw do
 
   get 'bidding_detail' => 'users#bidding_detail'
 
-  get '/users/price_statistics' => 'users#price_statistics'
+  get 'price_statistics' => 'users#price_statistics'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

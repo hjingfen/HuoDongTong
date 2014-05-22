@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     BiddingList.update_bidding_list(params[:user],params[:bid_list])
     SignUpList.update_sign_up_list(params[:user],params[:sign_up_list])
     BiddingDetail.update_bidding_detail(params[:user],params[:bid_detail])
+    BiddingCount.update_bidding_count(params[:user],params[:bid_detail])
     render :text => 'ok'
   end
 
@@ -67,5 +68,8 @@ class UsersController < ApplicationController
 
   def price_statistics
     @user_name = User.find(session[:user_id]).name
+    @bidding_counts = BiddingCount.where(:activity_name => params[:activity_name],:user_name => @user_name,:bid_name => params[:bid_name]).paginate(page: params[:page],:per_page => 10)
+    @activity_name = params[:activity_name]
+    @bid_name = params[:bid_name]
   end
 end

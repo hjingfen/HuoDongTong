@@ -91,11 +91,30 @@ Activity.sign_up_list = function(){
     return sign_ups;
 }
 
+Activity.bids = function(){
+    var bids = JSON.parse(localStorage.getItem('bids'));
+    _.each(bids,function(bid){
+        var bid_applicants = bid.bid_applicants;
+        var group_price = _.chain(bid_applicants)
+            .sortBy(function(bid_applicant){return parseInt(bid_applicant.price)})
+            .groupBy(function(bid_applicant){return bid_applicant.price})
+            .map(function(value, key){
+                var price_statistics = {};
+                price_statistics['price'] = key;
+                price_statistics['count'] = value.length;
+                return price_statistics;
+            })
+            .value();
+        bid['price'] = group_price;
+    })
+    return bids;
+}
+
 Activity.synchronize_to_service = function(){
     $.ajax({
         url:'/users/synchronize',
         type:'POST',
-        data:{user:localStorage.current_user,activities:Activity.user_index(),bid_list:Activity.bidding_list(),sign_up_list:Activity.sign_up_list(),bid_detail:JSON.parse(localStorage.bids)},
+        data:{user:localStorage.current_user,activities:Activity.user_index(),bid_list:Activity.bidding_list(),sign_up_list:Activity.sign_up_list(),bid_detail:Activity.bids()},
         success: function () {
             alert('同步成功！');
         },
