@@ -17,16 +17,23 @@
     = @bid_name
 .container(style="width:100%" )
   .row(style="background-color:#f5f5f5;height:100px" )
-    %h4(align='center')
-      获胜者：
-      =@winner.name
-    %h4(align='center')
-      出价：
-      =@winner.price
-      元
-    %h4(align='center')
-      手机号：
-      =@winner.phone
+    -if flash[:no_winner]
+      .text-center
+        %p(style="height:30px;line-height:30px;" ) 本次竞价无人胜出！
+    -if flash[:no_end]
+      .text-center
+        %p(style="height:30px;line-height:30px;" ) 活动正在进行中!
+    -if flash[:winner]
+      %h4(align='center')
+        获胜者：
+        =@winner.name
+      %h4(align='center')
+        出价：
+        =@winner.price
+        元
+      %h4(align='center')
+        手机号：
+        =@winner.phone
   .row(style="padding:25px 50px" )
     %ul.nav.nav-tabs.nav-justified
       %li.active
