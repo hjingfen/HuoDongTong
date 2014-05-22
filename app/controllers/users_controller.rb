@@ -48,17 +48,20 @@ class UsersController < ApplicationController
 
   def bidding_list
     @user_name = User.find(session[:user_id]).name
-    @bid_lists = BiddingList.where(:activity_name => params[:activity_name]).paginate(page: params[:page],:per_page => 10)
+    @activity_name = params[:activity_name]
+    @bid_lists = BiddingList.where(:activity_name => params[:activity_name],:user_name => @user_name).paginate(page: params[:page],:per_page => 10)
   end
 
   def sign_up_list
     @user_name = User.find(session[:user_id]).name
-    @sign_up_lists = SignUpList.where(:activity_name => params[:activity_name]).paginate(page: params[:page],:per_page => 10)
+    @activity_name = params[:activity_name]
+    @sign_up_lists = SignUpList.where(:activity_name => params[:activity_name],:user_name => @user_name).paginate(page: params[:page],:per_page => 10)
   end
 
   def bidding_detail
     @user_name = User.find(session[:user_id]).name
-    @bid_details = BiddingDetail.where(:activity_name => params[:activity_name],:bid_name => params[:bid_name]).paginate(page: params[:page],:per_page => 10)
+    @bid_details = BiddingDetail.where(:activity_name => params[:activity_name],:user_name => @user_name,:bid_name => params[:bid_name]).paginate(page: params[:page],:per_page => 10)
+    @activity_name = params[:activity_name]
     @bid_name = params[:bid_name]
   end
 

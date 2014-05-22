@@ -36,7 +36,7 @@ class AdminController < ApplicationController
 
   def change_password
     @admin_name = User.find_by(session[:admin_id]).name
-    @name = User.find_by_id(params[:id]).name
+    @name = User.find_by(:id => params[:id]).name
     @user_id = params[:id]
   end
 
