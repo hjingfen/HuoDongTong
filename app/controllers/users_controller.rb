@@ -47,11 +47,13 @@ class UsersController < ApplicationController
       @user_name = '管理员'+params[:admin_name]+',用户'+params[:user_name]
       session[:user_id] = User.find_by(:name => params[:user_name]).id
       @activities = Activity.where(:user_name => params[:user_name]).paginate(page: params[:page],:per_page => 10)
-    else
+    elsif params[:admin_user].present?
       @user = User.find(session[:user_id]).name
       @user_name = params[:admin_user]
-      #@user_name = User.find(session[:user_id]).name
       @activities = Activity.where(:user_name => @user).paginate(page: params[:page],:per_page => 10)
+    else
+      @user_name = User.find(session[:user_id]).name
+      @activities = Activity.where(:user_name => @user_name).paginate(page: params[:page],:per_page => 10)
     end
   end
 
