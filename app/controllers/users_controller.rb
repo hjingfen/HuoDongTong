@@ -43,29 +43,40 @@ class UsersController < ApplicationController
 
   def user_index
     session[:a] = params[:page] ? params[:page].to_i : 1
-    @user_name = User.find(session[:user_id]).name
-    @activities = Activity.where(:user_name => @user_name).paginate(page: params[:page],:per_page => 10)
+    if params[:admin_name].present?
+      @user_name = '管理员'+params[:admin_name]+',用户'+params[:user_name]
+      session[:user_id] = User.find_by(:name => params[:user_name]).id
+      @activities = Activity.where(:user_name => params[:user_name]).paginate(page: params[:page],:per_page => 10)
+    else
+      @user = User.find(session[:user_id]).name
+      @user_name = params[:admin_user]
+      #@user_name = User.find(session[:user_id]).name
+      @activities = Activity.where(:user_name => @user).paginate(page: params[:page],:per_page => 10)
+    end
   end
 
   def bidding_list
-    @user_name = User.find(session[:user_id]).name
+    @user = User.find(session[:user_id]).name
+    @user_name = params[:admin_user]
     @activity_name = params[:activity_name]
-    @bid_lists = BiddingList.where(:activity_name => params[:activity_name],:user_name => @user_name).paginate(page: params[:page],:per_page => 10)
+    @bid_lists = BiddingList.where(:activity_name => params[:activity_name],:user_name => @user).paginate(page: params[:page],:per_page => 10)
   end
 
   def sign_up_list
-    @user_name = User.find(session[:user_id]).name
+    @user = User.find(session[:user_id]).name
+    @user_name = params[:admin_user]
     @activity_name = params[:activity_name]
-    @sign_up_lists = SignUpList.where(:activity_name => params[:activity_name],:user_name => @user_name).paginate(page: params[:page],:per_page => 10)
+    @sign_up_lists = SignUpList.where(:activity_name => params[:activity_name],:user_name => @user).paginate(page: params[:page],:per_page => 10)
   end
 
   def bidding_detail
-    @user_name = User.find(session[:user_id]).name
-    @bid_details = BiddingDetail.where(:activity_name => params[:activity_name],:user_name => @user_name,:bid_name => params[:bid_name]).paginate(page: params[:page],:per_page => 10)
+    @user = User.find(session[:user_id]).name
+    @user_name = params[:admin_user]
+    @bid_details = BiddingDetail.where(:activity_name => params[:activity_name],:user_name => @user,:bid_name => params[:bid_name]).paginate(page: params[:page],:per_page => 10)
     @activity_name = params[:activity_name]
     @bid_name = params[:bid_name]
-    price = BiddingCount.find_by(:activity_name => params[:activity_name],:user_name => @user_name,:bid_name => params[:bid_name],:count => 1)
-    bid = BiddingDetail.find_by(:activity_name => params[:activity_name],:user_name => @user_name,:bid_name => params[:bid_name])
+    price = BiddingCount.find_by(:activity_name => params[:activity_name],:user_name => @user,:bid_name => params[:bid_name],:count => 1)
+    bid = BiddingDetail.find_by(:activity_name => params[:activity_name],:user_name => @user,:bid_name => params[:bid_name])
     flash[:winner] = flash[:no_winner] = flash[:no_end] = nil
     if bid.present?
       if bid[:status] == 'end'
@@ -84,12 +95,13 @@ class UsersController < ApplicationController
   end
 
   def price_statistics
-    @user_name = User.find(session[:user_id]).name
-    @bidding_counts = BiddingCount.where(:activity_name => params[:activity_name],:user_name => @user_name,:bid_name => params[:bid_name]).paginate(page: params[:page],:per_page => 10)
+    @user = User.find(session[:user_id]).name
+    @user_name = params[:admin_user]
+    @bidding_counts = BiddingCount.where(:activity_name => params[:activity_name],:user_name => @user,:bid_name => params[:bid_name]).paginate(page: params[:page],:per_page => 10)
     @activity_name = params[:activity_name]
     @bid_name = params[:bid_name]
-    price = BiddingCount.find_by(:activity_name => params[:activity_name],:user_name => @user_name,:bid_name => params[:bid_name],:count => 1)
-    bid = BiddingDetail.find_by(:activity_name => params[:activity_name],:user_name => @user_name,:bid_name => params[:bid_name])
+    price = BiddingCount.find_by(:activity_name => params[:activity_name],:user_name => @user,:bid_name => params[:bid_name],:count => 1)
+    bid = BiddingDetail.find_by(:activity_name => params[:activity_name],:user_name => @user,:bid_name => params[:bid_name])
     flash[:winner] = flash[:no_winner] = flash[:no_end] = nil
     if bid.present?
       if bid[:status] == 'end'

@@ -40,7 +40,7 @@ Rails.application.routes.draw do
 
   post '/phone_login' => 'users#phone_login'
 
-  get '/users/user_index' => 'users#user_index'
+  get 'user_index' => 'users#user_index'
 
   get 'bidding_list' => 'users#bidding_list'
 

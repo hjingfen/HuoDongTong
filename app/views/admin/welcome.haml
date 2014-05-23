@@ -26,7 +26,8 @@
                 %td
                   = a
                   - a += 1
-                %td= user.name
+                %td
+                  =link_to user.name,user_index_path(:admin_name => @admin_name,:user_name => user.name)
                 %td
                   = link_to '删除', delete_user_path(:id=>user.id),:method => :delete, :action => 'delete', :data=>{:confirm=>"您确定要删除\"#{user.name}\"吗？"}
                   %a(href="/user/#{user.id}/password/change") 修改密码

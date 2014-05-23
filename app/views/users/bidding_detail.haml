@@ -8,11 +8,11 @@
       %a(style="text-decoration:none" href="/signout" )退出
 %ol.breadcrumb(style="padding-left:52px" )
   %li
-    %a(style="text-decoration:none" href="/users/user_index" )
-      首页
+    %a(style="text-decoration:none" )
+      =link_to '首页',user_index_path(:user_name => @user_name,:admin_user => @user_name)
   %li
     %a
-      =link_to '竞价列表',bidding_list_path(:activity_name => @activity_name,:user_name => @user_name )
+      =link_to '竞价列表',bidding_list_path(:activity_name => @activity_name,:user_name => @user_name ,:admin_user => @user_name)
   %li.active
     = @bid_name
 .container(style="width:100%" )
@@ -40,7 +40,7 @@
         %a 出价列表
       %li
         %a
-          =link_to '价格统计',price_statistics_path(:activity_name => @activity_name,:user_name => @user_name,:bid_name => @bid_name )
+          =link_to '价格统计',price_statistics_path(:activity_name => @activity_name,:user_name => @user_name,:bid_name => @bid_name,:admin_user => @user_name)
     .panel.panel-default
       %table.table(style="text-align:center" )
         %thead
