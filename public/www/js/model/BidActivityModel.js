@@ -2,14 +2,14 @@ function BidActivity(){
     this.status = 'un_start';
     this.bid_applicants = [];
     this.user_name = localStorage.current_user;
-    this.activity_name = localStorage.ended_activity;
+    this.activity_name = localStorage.displayed_activity;
 }
 
 BidActivity.save_bid_activity = function(){
     var bids = JSON.parse(localStorage.bids);
     var bid = new BidActivity;
     var current_activity_bid = _.filter(bids,function(bid){
-        return bid.user_name == localStorage.current_user && bid.activity_name == localStorage.ended_activity;
+        return bid.user_name == localStorage.current_user && bid.activity_name == localStorage.displayed_activity;
     })
     bid['name'] = "竞价"+(current_activity_bid.length+1);
     bids.push(bid);
