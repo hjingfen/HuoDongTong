@@ -18,8 +18,7 @@
         .panel-heading(style="padding:2px 15px" )
           %h4
             竞价列表
-            %a(style="text-decoration:none;font-size:14px;float:right" )
-              =link_to '报名列表',sign_up_list_path(:activity_name => @activity_name,:user_name => @user_name)
+            =link_to '报名列表',sign_up_list_path(:activity_name => @activity_name,:user_name => @user_name), :class => 'pull-right-link'
         %table.table(style="text-align:center" )
           %thead
             %tr

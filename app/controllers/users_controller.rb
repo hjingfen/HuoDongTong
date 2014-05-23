@@ -7,11 +7,11 @@ class UsersController < ApplicationController
   end
 
   def synchronize
-    Activity.update_activities(params[:user],params[:activities])
-    BiddingList.update_bidding_list(params[:user],params[:bid_list])
-    SignUpList.update_sign_up_list(params[:user],params[:sign_up_list])
-    BiddingDetail.update_bidding_detail(params[:user],params[:bid_detail])
-    BiddingCount.update_bidding_count(params[:user],params[:bid_detail])
+    Activity.update_activities(params[:activities])
+    BiddingList.update_bidding_list(params[:bid_list])
+    SignUpList.update_sign_up_list(params[:sign_up_list])
+    BiddingDetail.update_bidding_detail(params[:bid_detail])
+    BiddingCount.update_bidding_count(params[:bid_detail])
     render :text => 'ok'
   end
 
