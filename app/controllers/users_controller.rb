@@ -67,13 +67,19 @@ class UsersController < ApplicationController
     price = BiddingCount.find_by(:activity_name => params[:activity_name],:user_name => @user_name,:bid_name => params[:bid_name],:count => 1)
     bid = BiddingDetail.find_by(:activity_name => params[:activity_name],:user_name => @user_name,:bid_name => params[:bid_name])
     flash[:winner] = flash[:no_winner] = flash[:no_end] = nil
-    if price.present?
-      flash[:winner] = true
-      @winner = BiddingDetail.find_by(:price => price.price)
-    elsif !bid.present?
-      flash[:no_end] = true
+    if bid.present?
+      if bid[:status] == 'end'
+        if price.present?
+          flash[:winner] = true
+          @winner = BiddingDetail.find_by(:price => price.price)
+        else
+          flash[:no_winner] = true
+        end
+      else
+        flash[:no_end] = true
+      end
     else
-      flash[:no_winner] = true
+      flash[:no_end] = true
     end
   end
 
@@ -85,13 +91,19 @@ class UsersController < ApplicationController
     price = BiddingCount.find_by(:activity_name => params[:activity_name],:user_name => @user_name,:bid_name => params[:bid_name],:count => 1)
     bid = BiddingDetail.find_by(:activity_name => params[:activity_name],:user_name => @user_name,:bid_name => params[:bid_name])
     flash[:winner] = flash[:no_winner] = flash[:no_end] = nil
-    if price.present?
-      flash[:winner] = true
-      @winner = BiddingDetail.find_by(:price => price.price)
-    elsif !bid.present?
-      flash[:no_end] = true
+    if bid.present?
+      if bid[:status] == 'end'
+        if price.present?
+          flash[:winner] = true
+          @winner = BiddingDetail.find_by(:price => price.price)
+        else
+          flash[:no_winner] = true
+        end
+      else
+        flash[:no_end] = true
+      end
     else
-      flash[:no_winner] = true
+      flash[:no_end] = true
     end
   end
 end
