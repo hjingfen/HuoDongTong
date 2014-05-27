@@ -120,4 +120,18 @@ class UsersController < ApplicationController
       flash[:no_end] = true
     end
   end
+
+  def show
+    bidding_activity = BiddingDetail.find_by(:status => 'start')
+    @activity_name = bidding_activity.activity_name
+    user_name = bidding_activity.user_name
+    bid_name = bidding_activity.bid_name
+    current_bid = BiddingList.find_by(:activity_name => @activity_name,:user_name => user_name,:bid_name => bid_name)
+    @sign_up_count = current_bid.sign_up_counts
+    @bidding_count = current_bid.bidding_counts
+    bidding_details = BiddingDetail.where(:activity_name => @activity_name,:user_name => user_name,:bid_name => bid_name)
+    @bidding_details = bidding_details.reverse().take(10)
+  end
+
 end
+
