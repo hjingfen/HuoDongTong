@@ -89,10 +89,10 @@ class UsersController < ApplicationController
           flash[:no_winner] = true
         end
       else
-        flash[:no_end] = true
+        redirect_to :action => :show
       end
     else
-      flash[:no_end] = true
+      redirect_to :action => :show
     end
   end
 
@@ -103,35 +103,33 @@ class UsersController < ApplicationController
     @activity_name = params[:activity_name]
     @bid_name = params[:bid_name]
     price = BiddingCount.find_by(:activity_name => params[:activity_name],:user_name => @user,:bid_name => params[:bid_name],:count => 1)
-    bid = BiddingDetail.find_by(:activity_name => params[:activity_name],:user_name => @user,:bid_name => params[:bid_name])
-    flash[:winner] = flash[:no_winner] = flash[:no_end] = nil
-    if bid.present?
-      if bid[:status] == 'end'
-        if price.present?
-          flash[:winner] = true
-          @winner = BiddingDetail.find_by(:price => price.price)
-        else
-          flash[:no_winner] = true
-        end
-      else
-        flash[:no_end] = true
-      end
+    flash[:winner] = flash[:no_winner] = nil
+    if price.present?
+      flash[:winner] = true
+      @winner = BiddingDetail.find_by(:price => price.price)
     else
-      flash[:no_end] = true
+      flash[:no_winner] = true
     end
   end
 
   def show
     bidding_activity = BiddingDetail.find_by(:status => 'start')
-    @activity_name = bidding_activity.activity_name
-    user_name = bidding_activity.user_name
-    bid_name = bidding_activity.bid_name
-    current_bid = BiddingList.find_by(:activity_name => @activity_name,:user_name => user_name,:bid_name => bid_name)
-    @sign_up_count = current_bid.sign_up_counts
-    @bidding_count = current_bid.bidding_counts
-    bidding_details = BiddingDetail.where(:activity_name => @activity_name,:user_name => user_name,:bid_name => bid_name)
-    @bidding_details = bidding_details.reverse().take(10)
+    if bidding_activity.present?
+      @activity_name = bidding_activity.activity_name
+      user_name = bidding_activity.user_name
+      bid_name = bidding_activity.bid_name
+      current_bid = BiddingList.find_by(:activity_name => @activity_name,:user_name => user_name,:bid_name => bid_name)
+      @sign_up_count = current_bid.sign_up_counts
+      @bidding_count = current_bid.bidding_counts
+      bidding_details = BiddingDetail.where(:activity_name => @activity_name,:user_name => user_name,:bid_name => bid_name)
+      @bidding_details = bidding_details.reverse().take(10)
+    else
+      redirect_to :action => :show_none
+    end
   end
 
+  def show_none
+
+  end
 end
 

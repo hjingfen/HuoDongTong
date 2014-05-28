@@ -52,6 +52,8 @@ Rails.application.routes.draw do
 
   get 'show' => 'users#show'
 
+  get 'show_none' => 'users#show_none'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
