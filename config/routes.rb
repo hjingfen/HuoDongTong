@@ -54,6 +54,9 @@ Rails.application.routes.draw do
 
   get 'show_none' => 'users#show_none'
 
+  post 'send_result' => 'users#send_result'
+
+  get 'bidding_result' => 'users#bidding_result'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

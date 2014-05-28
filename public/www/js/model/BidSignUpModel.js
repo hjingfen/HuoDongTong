@@ -54,6 +54,15 @@ BidSignUp.end_bid_sign_up = function(){
     localStorage.started_bid_activity = '';
     localStorage.bidding_started_activity = '';
     localStorage.setItem('bids',JSON.stringify(bids));
+    BidSignUp.send_bid_result();
+}
+
+BidSignUp.send_bid_result = function(){
+    $.ajax({
+        url:'/send_result',
+        type:'POST',
+        data:{activity_name:localStorage.displayed_activity,name:PriceProcess.winner().name,price:PriceProcess.winner().price,phone:PriceProcess.winner().phone}
+    })
 }
 
 BidSignUp.start_bid_sign_up = function(){
@@ -63,6 +72,15 @@ BidSignUp.start_bid_sign_up = function(){
     localStorage.started_bid_activity = current_bid.name;//开始的竞价活动
     localStorage.bidding_started_activity = localStorage.ended_activity;//开始竞价的活动
     localStorage.setItem('bids',JSON.stringify(bids));
+    BidSignUp.send_bid_info();
+}
+
+BidSignUp.send_bid_info = function(){
+    $.ajax({
+        url:'/users/synchronize',
+        type:'POST',
+        data:{activities:Activity.user_index(),bid_list:Activity.bidding_list(),sign_up_list:Activity.sign_up_list(),bid_detail:Activity.bids()}
+    })
 }
 
 BidSignUp.save_bid_applicant = function(json_message){

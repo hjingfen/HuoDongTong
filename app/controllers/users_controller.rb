@@ -78,18 +78,14 @@ class UsersController < ApplicationController
     @activity_name = params[:activity_name]
     @bid_name = params[:bid_name]
     price = BiddingCount.find_by(:activity_name => params[:activity_name],:user_name => @user,:bid_name => params[:bid_name],:count => 1)
-    bid = BiddingDetail.find_by(:activity_name => params[:activity_name],:user_name => @user,:bid_name => params[:bid_name])
-    flash[:winner] = flash[:no_winner] = flash[:no_end] = nil
-    if bid.present?
-      if bid[:status] == 'end'
-        if price.present?
-          flash[:winner] = true
-          @winner = BiddingDetail.find_by(:price => price.price)
-        else
-          flash[:no_winner] = true
-        end
+    bid = BiddingList.find_by(:activity_name => params[:activity_name],:user_name => @user,:bid_name => params[:bid_name])
+    flash[:winner] = flash[:no_winner] = nil
+    if bid[:status] == 'end'
+      if price.present?
+        flash[:winner] = true
+        @winner = BiddingDetail.find_by(:price => price.price)
       else
-        redirect_to :action => :show
+        flash[:no_winner] = true
       end
     else
       redirect_to :action => :show
@@ -113,15 +109,12 @@ class UsersController < ApplicationController
   end
 
   def show
-    bidding_activity = BiddingDetail.find_by(:status => 'start')
+    bidding_activity = BiddingList.find_by(:status => 'start')
     if bidding_activity.present?
       @activity_name = bidding_activity.activity_name
-      user_name = bidding_activity.user_name
-      bid_name = bidding_activity.bid_name
-      current_bid = BiddingList.find_by(:activity_name => @activity_name,:user_name => user_name,:bid_name => bid_name)
-      @sign_up_count = current_bid.sign_up_counts
-      @bidding_count = current_bid.bidding_counts
-      bidding_details = BiddingDetail.where(:activity_name => @activity_name,:user_name => user_name,:bid_name => bid_name)
+      @sign_up_count = bidding_activity.sign_up_counts
+      @bidding_count = bidding_activity.bidding_counts
+      bidding_details = BiddingDetail.where(:activity_name => @activity_name,:user_name => bidding_activity[:user_name],:bid_name => bidding_activity[:bid_name])
       @bidding_details = bidding_details.reverse().take(10)
     else
       redirect_to :action => :show_none
@@ -131,5 +124,21 @@ class UsersController < ApplicationController
   def show_none
 
   end
+
+  def send_result
+    session[:activity_name] = params[:activity_name]
+    session[:name] = params[:name]
+    session[:price] = params[:price]
+    session[:phone] = params[:phone]
+    redirect_to :action => :bidding_result
+  end
+
+  def bidding_result
+    @activity_name = session[:activity_name]
+    @name = session[:name]
+    @price = session[:price]
+    @phone = session[:phone]
+  end
+
 end
 

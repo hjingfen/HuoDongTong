@@ -5,7 +5,7 @@ class BiddingList < ActiveRecord::Base
         BiddingList.delete_all(:user_name => value[:user_name])
       end
       bid_list.each do |key,value|
-        BiddingList.create(:user_name => value[:user_name],:activity_name => value[:activity_name],:bid_name => value[:name],:sign_up_counts => value[:sign_up_counts],:bidding_counts => value[:bidding_counts])
+        BiddingList.create(:user_name => value[:user_name],:activity_name => value[:activity_name],:bid_name => value[:name],:sign_up_counts => value[:sign_up_counts],:bidding_counts => value[:bidding_counts],:status => value[:status])
       end
     end
   end
