@@ -61,7 +61,7 @@ BidSignUp.send_bid_result = function(){
     $.ajax({
         url:'/send_result',
         type:'POST',
-        data:{activity_name:localStorage.displayed_activity,name:PriceProcess.winner().name,price:PriceProcess.winner().price,phone:PriceProcess.winner().phone}
+        data:{activity_name:localStorage.displayed_activity,bid_list:Activity.bidding_list(),bid_detail:Activity.bids(),name:PriceProcess.winner().name,price:PriceProcess.winner().price,phone:PriceProcess.winner().phone}
     })
 }
 

@@ -12,7 +12,11 @@
         .panel-heading(style="padding:8px 14px" )
           %h4
             活动信息
-            %a.btn.btn-default(style="font-size:12px; float:right; background-color:#F0F0F0" href='/show')同步展示
+            %button.btn.btn-default(style="font-size:12px; float:right; background-color:#F0F0F0" )
+              - if flash[:show]
+                =link_to '同步展示',show_path
+              - if flash[:show_none]
+                =link_to '同步展示'
         %table.table(style="text-align:center" )
           %thead
             %tr

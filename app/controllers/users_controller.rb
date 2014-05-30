@@ -55,6 +55,13 @@ class UsersController < ApplicationController
       @user_name = User.find(session[:user_id]).name
       @activities = Activity.where(:user_name => @user_name).paginate(page: params[:page],:per_page => 10)
     end
+    bidding_activity = BiddingList.find_by(:status => 'start')
+    flash[:show] = flash[:show_none] = nil
+    if bidding_activity.present?
+      flash[:show] = true
+    else
+      flash[:show_none] = true
+    end
   end
 
   def bidding_list
@@ -110,19 +117,11 @@ class UsersController < ApplicationController
 
   def show
     bidding_activity = BiddingList.find_by(:status => 'start')
-    if bidding_activity.present?
-      @activity_name = bidding_activity.activity_name
-      @sign_up_count = bidding_activity.sign_up_counts
-      @bidding_count = bidding_activity.bidding_counts
-      bidding_details = BiddingDetail.where(:activity_name => @activity_name,:user_name => bidding_activity[:user_name],:bid_name => bidding_activity[:bid_name])
-      @bidding_details = bidding_details.reverse().take(10)
-    else
-      redirect_to :action => :show_none
-    end
-  end
-
-  def show_none
-
+    @activity_name = bidding_activity.activity_name
+    @sign_up_count = bidding_activity.sign_up_counts
+    @bidding_count = bidding_activity.bidding_counts
+    bidding_details = BiddingDetail.where(:activity_name => @activity_name,:user_name => bidding_activity[:user_name],:bid_name => bidding_activity[:bid_name])
+    @bidding_details = bidding_details.reverse().take(10)
   end
 
   def send_result
@@ -130,6 +129,9 @@ class UsersController < ApplicationController
     session[:name] = params[:name]
     session[:price] = params[:price]
     session[:phone] = params[:phone]
+    BiddingList.update_bidding_list(params[:bid_list])
+    BiddingDetail.update_bidding_detail(params[:bid_detail])
+    BiddingCount.update_bidding_count(params[:bid_detail])
     redirect_to :action => :bidding_result
   end
 
