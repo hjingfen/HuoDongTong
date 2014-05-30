@@ -68,27 +68,27 @@ class UsersController < ApplicationController
   end
 
   def bidding_list
-    @user = User.find(session[:user_id]).name
+    user_name = User.find(session[:user_id]).name
     @user_name = params[:admin_user]
     @activity_name = params[:activity_name]
-    @bid_lists = BiddingList.where(:activity_name => params[:activity_name],:user_name => @user).paginate(page: params[:page],:per_page => 10)
+    @bid_lists = BiddingList.where(:activity_name => params[:activity_name],:user_name => user_name).paginate(page: params[:page],:per_page => 10)
   end
 
   def sign_up_list
-    @user = User.find(session[:user_id]).name
+    user_name = User.find(session[:user_id]).name
     @user_name = params[:admin_user]
     @activity_name = params[:activity_name]
-    @sign_up_lists = SignUpList.where(:activity_name => params[:activity_name],:user_name => @user).paginate(page: params[:page],:per_page => 10)
+    @sign_up_lists = SignUpList.where(:activity_name => params[:activity_name],:user_name => user_name).paginate(page: params[:page],:per_page => 10)
   end
 
   def bidding_detail
-    @user = User.find(session[:user_id]).name
+    user_name = User.find(session[:user_id]).name
     @user_name = params[:admin_user]
-    @bid_details = BiddingDetail.where(:activity_name => params[:activity_name],:user_name => @user,:bid_name => params[:bid_name]).paginate(page: params[:page],:per_page => 10)
+    @bid_details = BiddingDetail.where(:activity_name => params[:activity_name],:user_name => user_name,:bid_name => params[:bid_name]).paginate(page: params[:page],:per_page => 10)
     @activity_name = params[:activity_name]
     @bid_name = params[:bid_name]
-    price = BiddingCount.find_by(:activity_name => params[:activity_name],:user_name => @user,:bid_name => params[:bid_name],:count => 1)
-    bid = BiddingList.find_by(:activity_name => params[:activity_name],:user_name => @user,:bid_name => params[:bid_name])
+    price = BiddingCount.find_by(:activity_name => params[:activity_name],:user_name => user_name,:bid_name => params[:bid_name],:count => 1)
+    bid = BiddingList.find_by(:activity_name => params[:activity_name],:user_name => user_name,:bid_name => params[:bid_name])
     flash[:winner] = flash[:no_winner] = flash[:no_end] = nil
     if bid[:status] == 'end'
       if price.present?
@@ -103,13 +103,13 @@ class UsersController < ApplicationController
   end
 
   def price_statistics
-    @user = User.find(session[:user_id]).name
+    user_name = User.find(session[:user_id]).name
     @user_name = params[:admin_user]
-    @bidding_counts = BiddingCount.where(:activity_name => params[:activity_name],:user_name => @user,:bid_name => params[:bid_name]).paginate(page: params[:page],:per_page => 10)
+    @bidding_counts = BiddingCount.where(:activity_name => params[:activity_name],:user_name => user_name,:bid_name => params[:bid_name]).paginate(page: params[:page],:per_page => 10)
     @activity_name = params[:activity_name]
     @bid_name = params[:bid_name]
-    price = BiddingCount.find_by(:activity_name => params[:activity_name],:user_name => @user,:bid_name => params[:bid_name],:count => 1)
-    bid = BiddingList.find_by(:activity_name => params[:activity_name],:user_name => @user,:bid_name => params[:bid_name])
+    price = BiddingCount.find_by(:activity_name => params[:activity_name],:user_name => user_name,:bid_name => params[:bid_name],:count => 1)
+    bid = BiddingList.find_by(:activity_name => params[:activity_name],:user_name => user_name,:bid_name => params[:bid_name])
     flash[:winner] = flash[:no_winner] = flash[:no_end] = nil
     if bid[:status] == 'end'
       if price.present?
