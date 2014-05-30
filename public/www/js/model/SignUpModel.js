@@ -49,15 +49,6 @@ SignUp.start_sign_up = function(){
     })
     localStorage.started_activity = localStorage.displayed_activity;
     localStorage.setItem('sign_ups',JSON.stringify(sign_ups));
-    SignUp.send_sign_up_info();
-}
-
-SignUp.send_sign_up_info = function(){
-    $.ajax({
-        url:'/users/synchronize',
-        type:'POST',
-        data:{activities:Activity.user_index(),bid_list:Activity.bidding_list(),sign_up_list:Activity.sign_up_list(),bid_detail:Activity.bids()},
-    })
 }
 
 SignUp.save_applicants = function(json_message){
