@@ -121,30 +121,28 @@ class UsersController < ApplicationController
   end
 
   def show
-    bidding_activity = BiddingList.find_by(:status => 'start')
-    @activity_name = bidding_activity.activity_name
-    @sign_up_count = bidding_activity.sign_up_counts
-    @bidding_count = bidding_activity.bidding_counts
-    bidding_details = BiddingDetail.where(:activity_name => @activity_name,:user_name => bidding_activity[:user_name],:bid_name => bidding_activity[:bid_name])
-    @bidding_details = bidding_details.reverse().take(10)
-  end
-
-  def send_result
-    session[:activity_name] = params[:activity_name]
-    session[:name] = params[:name]
-    session[:price] = params[:price]
-    session[:phone] = params[:phone]
-    BiddingList.update_bidding_list(params[:bid_list])
-    BiddingDetail.update_bidding_detail(params[:bid_detail])
-    BiddingCount.update_bidding_count(params[:bid_detail])
-    redirect_to :action => :bidding_result
-  end
-
-  def bidding_result
-    @activity_name = session[:activity_name]
-    @name = session[:name]
-    @price = session[:price]
-    @phone = session[:phone]
+    bidding_activity = BiddingList.find_by(:status => 'start',:user_name => params[:user_name])
+    flash[:bidding] = flash[:result] = flash[:winner] = flash[:no_winner] = nil
+    if bidding_activity.present?
+      session[:current_activity_name] = bidding_activity[:activity_name]
+      session[:current_bid_name] = bidding_activity[:bid_name]
+      flash[:bidding] = true
+      @activity_name = bidding_activity.activity_name
+      @sign_up_count = bidding_activity.sign_up_counts
+      @bidding_count = bidding_activity.bidding_counts
+      bidding_details = BiddingDetail.where(:activity_name => @activity_name,:user_name => bidding_activity[:user_name],:bid_name => bidding_activity[:bid_name])
+      @bidding_details = bidding_details.reverse().take(10)
+    else
+      flash[:result] = true
+      @activity_name = session[:activity_name]
+      price = BiddingCount.find_by(:activity_name => @activity_name,:user_name => params[:user_name],:bid_name => session[:current_bid_name],:count => 1)
+      if price.present?
+        flash[:winner] = true
+        @winner = BiddingDetail.find_by(:price => price.price)
+      else
+        flash[:no_winner] = true
+      end
+    end
   end
 
 end

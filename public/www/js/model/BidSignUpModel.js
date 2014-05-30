@@ -59,9 +59,9 @@ BidSignUp.end_bid_sign_up = function(){
 
 BidSignUp.send_bid_result = function(){
     $.ajax({
-        url:'/send_result',
+        url:'/users/synchronize',
         type:'POST',
-        data:{activity_name:localStorage.displayed_activity,bid_list:Activity.bidding_list(),bid_detail:Activity.bids(),name:PriceProcess.winner().name,price:PriceProcess.winner().price,phone:PriceProcess.winner().phone}
+        data:{activities:Activity.user_index(),bid_list:Activity.bidding_list(),sign_up_list:Activity.sign_up_list(),bid_detail:Activity.bids()}
     })
 }
 
