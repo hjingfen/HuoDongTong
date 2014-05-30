@@ -47,8 +47,4 @@ class AdminController < ApplicationController
     render :text => 'ok'
   end
 
-  def signout
-    session[:admin_id] = nil
-    redirect_to :controller => :session, :action => :index
-  end
 end

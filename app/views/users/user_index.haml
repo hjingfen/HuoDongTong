@@ -1,11 +1,6 @@
 .container
-  .row(style="width:1320px" )
-    .col-xs-3(style="padding-left:55px" )
-      %h1活动通
-    .col-xs-9(style="margin-top:20px; text-align:right" )
-      你好,
-      = @user_name
-      %a(style="text-decoration:none" href="/signout" )退出
+  =render partial: 'layouts/header',locals: {name:@user_name}
+
   .row(style="width:1320px;padding:20px 0px")
     .col-xs-12(style="padding-left:55px" )
       .panel.panel-default
@@ -37,6 +32,5 @@
                   =link_to activity.sign_up_counts,sign_up_list_path(:activity_name => activity.activity_name,:user_name =>activity.user_name,:admin_user => @user_name)
                 %td
                   =link_to activity.bidding_counts,bidding_list_path(:activity_name => activity.activity_name,:user_name => activity.user_name,:admin_user => @user_name)
-  .row(style="width:1305px")
-    .col-xs-12(style="text-align:right" )
-      = will_paginate @activities,:previous_label => '&laquo',:next_label =>'&raquo'
+
+  = render partial: 'layouts/footer',locals: {names:@activities}

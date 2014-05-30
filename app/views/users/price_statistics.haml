@@ -1,4 +1,4 @@
-=render partial: 'layouts/header'
+=render partial: 'result'
 
 .row(style="padding:25px 50px" )
   %ul.nav.nav-tabs.nav-justified
@@ -18,6 +18,5 @@
           %tr
             %td=bidding.price
             %td=bidding.count
-.row(style="width:1305px")
-  .col-xs-12(style="text-align:right" )
-    = will_paginate @bidding_counts,:previous_label => '&laquo',:next_label =>'&raquo'
+
+= render partial: 'layouts/footer',locals: {names:@bidding_counts}

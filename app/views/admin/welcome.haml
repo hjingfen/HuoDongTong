@@ -1,11 +1,6 @@
 .container
-  .row(style="width:1320px;" )
-    .col-xs-3(style="padding-left:55px" )
-      %h1活动通
-    .col-xs-9(style="margin-top:20px; text-align:right" )
-      你好,
-      = @admin_name
-      %a(style="text-decoration:none" href="/admin/signout" )退出
+  = render partial: 'layouts/header', locals: {name: @admin_name}
+
   .row(style="width:1320px;")
     .col-xs-12(style="padding-left:55px" )
       .panel.panel-default
@@ -35,6 +30,5 @@
     -if flash[:delete_success]
       .text-center.alert-success
         %p(style="height:30px;line-height:30px;" ) 删除用户成功！
-  .row(style="width:1305px")
-    .col-xs-12(style="text-align:right" )
-      = will_paginate @users,:previous_label => '&laquo',:next_label =>'&raquo'
+
+  = render partial: 'layouts/footer',locals: {names:@users}

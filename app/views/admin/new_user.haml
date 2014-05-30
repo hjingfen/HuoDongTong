@@ -1,11 +1,6 @@
 .container
-  .row(style="width:1320px;" )
-    .col-xs-3(style="padding-left:45px" )
-      %h1活动通
-    .col-xs-9(style="margin-top:20px; text-align:right" )
-      你好,
-      = @admin_name
-      %a(style="text-decoration:none" href="/admin/signout" )退出
+  = render partial: 'layouts/header',locals: {name:@admin_name}
+
 %ol.breadcrumb(style="padding-left:52px" )
   %li
     %a(style="text-decoration:none" href="/admin/welcome" )

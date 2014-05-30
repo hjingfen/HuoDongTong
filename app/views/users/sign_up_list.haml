@@ -1,11 +1,6 @@
 .container
-  .row(style="width:1320px;" )
-    .col-xs-3(style="padding-left:45px" )
-      %h1活动通
-    .col-xs-9(style="margin-top:20px; text-align:right" )
-      你好,
-      = @user_name
-      %a(style="text-decoration:none" href="/signout" )退出
+=render partial: 'layouts/header',locals: {name:@user_name}
+
 %ol.breadcrumb(style="padding-left:52px" )
   %li
     %a(style="text-decoration:none" )
@@ -34,6 +29,5 @@
                   - a += 1
                 %td=s.name
                 %td=s.phone
-  .row(style="width:1305px")
-    .col-xs-12(style="text-align:right" )
-      = will_paginate @sign_up_lists,:previous_label => '&laquo',:next_label =>'&raquo'
+
+  = render partial: 'layouts/footer',locals: {names:@sign_up_lists}

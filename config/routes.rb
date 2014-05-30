@@ -22,8 +22,6 @@ Rails.application.routes.draw do
 
   post '/user/:id/password/save_password' => 'admin#save_password'
 
-  get '/admin/signout' => 'admin#signout'
-
   delete 'delete_user' => 'admin#delete'
 
   get '/session/forgot1' => 'session#forgot1'
