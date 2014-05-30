@@ -47,6 +47,7 @@ BidSignUp.current_bid_info = function(bids){
 }
 
 BidSignUp.end_bid_sign_up = function(){
+    window.clearInterval(timer);
     var bids = JSON.parse(localStorage.bids);
     var current_bid = BidSignUp.current_bid_info(bids);
     current_bid.status = 'end';
@@ -56,6 +57,7 @@ BidSignUp.end_bid_sign_up = function(){
     localStorage.setItem('bids',JSON.stringify(bids));
 }
 
+var timer;
 BidSignUp.start_bid_sign_up = function(){
     var bids = JSON.parse(localStorage.bids);
     var current_bid = BidSignUp.current_bid_info(bids);
@@ -63,7 +65,7 @@ BidSignUp.start_bid_sign_up = function(){
     localStorage.started_bid_activity = current_bid.name;//开始的竞价活动
     localStorage.bidding_started_activity = localStorage.ended_activity;//开始竞价的活动
     localStorage.setItem('bids',JSON.stringify(bids));
-    BidSignUp.synchronize();
+    timer = window.setInterval("BidSignUp.synchronize()",15000);
 }
 
 BidSignUp.synchronize = function(){

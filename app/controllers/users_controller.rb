@@ -137,8 +137,8 @@ class UsersController < ApplicationController
       @bidding_details = bidding_details.reverse().take(10)
     else
       flash[:result] = true
-      @activity_name = session[:activity_name]
-      price = BiddingCount.find_by(:activity_name => @activity_name,:user_name => params[:user_name],:bid_name => session[:current_bid_name],:count => 1)
+      @activity_name = session[:current_activity_name]
+      price = BiddingCount.find_by(:activity_name => session[:current_activity_name],:user_name => params[:user_name],:bid_name => session[:current_bid_name],:count => 1)
       if price.present?
         flash[:winner] = true
         @winner = BiddingDetail.find_by(:price => price.price)

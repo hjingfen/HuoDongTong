@@ -1,41 +1,44 @@
 .container
-  - if flash[:bidding]
-    .row(style="width:1365px;height:150px;background-color:#F5F5F5" )
-      %h1(align='center' )
-        =@activity_name
-      %h3(align='center' )
-        参与人数：
-        =@bidding_count
-        ='/'
-        =@sign_up_count
-    .row(style="width:1320px;padding:20px 0px")
-      .col-xs-12(style="padding-left:55px" )
-        .panel.panel-default
-          %table.table(style="text-align:center" )
-            %thead
-              %tr
-                %th.text-center 姓名
-                %th.text-center 电话
-            %tbody
-            - @bidding_details.each do |detail|
-              %tr
-                %td= detail.name
-                %td= detail.phone
-  - if flash[:result]
-    .row(style="width:1365px;height:300px;background-color:#F5F5F5" )
-      %h1(align='center' )
-        = @activity_name
-      %h2(align='center' )
-        比赛结果：
-      - if flash[:winner]
+  %head
+    %meta(http-equiv="refresh" content="5")
+  %body
+    - if flash[:bidding]
+      .row(style="width:1365px;height:150px;background-color:#F5F5F5" )
+        %h1(align='center' )
+          =@activity_name
         %h3(align='center' )
-          获胜者：
-          = @winner.name
-        %h3(align='center' )
-          出价：
-          = @winner.price
-        %h3(align='center' )
-          电话：
-          = @winner.phone
-      - if flash[:no_winner]
-        %h3(align='center') 无人胜出！
+          参与人数：
+          =@bidding_count
+          ='/'
+          =@sign_up_count
+      .row(style="width:1320px;padding:20px 0px")
+        .col-xs-12(style="padding-left:55px" )
+          .panel.panel-default
+            %table.table(style="text-align:center" )
+              %thead
+                %tr
+                  %th.text-center 姓名
+                  %th.text-center 电话
+              %tbody
+              - @bidding_details.each do |detail|
+                %tr
+                  %td= detail.name
+                  %td= detail.phone
+    - if flash[:result]
+      .row(style="width:1365px;height:300px;background-color:#F5F5F5" )
+        %h1(align='center' )
+          = @activity_name
+        %h2(align='center' )
+          比赛结果：
+        - if flash[:winner]
+          %h3(align='center' )
+            获胜者：
+            = @winner.name
+          %h3(align='center' )
+            出价：
+            = @winner.price
+          %h3(align='center' )
+            电话：
+            = @winner.phone
+        - if flash[:no_winner]
+          %h3(align='center') 无人胜出！
