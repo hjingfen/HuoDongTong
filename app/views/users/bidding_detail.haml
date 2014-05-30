@@ -20,6 +20,9 @@
     -if flash[:no_winner]
       .text-center
         %p(style="height:30px;line-height:30px;" ) 本次竞价无人胜出！
+    -if flash[:no_end]
+      .text-center
+        %p(style="height:30px;line-height:30px;" ) 活动正在进行中！
     -if flash[:winner]
       %h4(align='center')
         获胜者：

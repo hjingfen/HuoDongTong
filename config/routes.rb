@@ -52,8 +52,6 @@ Rails.application.routes.draw do
 
   get 'show' => 'users#show'
 
-  #get 'show_none' => 'users#show_none'
-
   post 'send_result' => 'users#send_result'
 
   get 'bidding_result' => 'users#bidding_result'
