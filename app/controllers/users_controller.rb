@@ -64,6 +64,7 @@ class UsersController < ApplicationController
   end
 
   def bidding_list
+    @current_page = params[:page] ? params[:page].to_i-1 : 0
     user_name = User.find(session[:user_id]).name
     @user_name = params[:admin_user]
     @activity_name = params[:activity_name]
@@ -71,6 +72,7 @@ class UsersController < ApplicationController
   end
 
   def sign_up_list
+    @current_page = params[:page] ? params[:page].to_i-1:0
     user_name = User.find(session[:user_id]).name
     @user_name = params[:admin_user]
     @activity_name = params[:activity_name]
@@ -113,6 +115,7 @@ class UsersController < ApplicationController
   private
 
   def provide_head_data
+    @current_page = params[:page] ? params[:page].to_i-1 : 0
     @user = User.find(session[:user_id])
     @user_name = params[:admin_user]
     @activity_name = params[:activity_name]

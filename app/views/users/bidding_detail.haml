@@ -16,12 +16,10 @@
           %th.text-center 价格/元
           %th.text-center 手机号
       %tbody
-        - a = (session[:a]-1)*10+1
-        - @bid_details.each do |bid_detail|
+        - @bid_details.each_with_index do |bid_detail,index|
           %tr
             %td
-              = a
-              - a += 1
+              = index + 1 + @current_page*10
             %td=bid_detail.name
             %td=bid_detail.price
             %td=bid_detail.phone
