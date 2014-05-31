@@ -62,3 +62,9 @@
     float: right;
     font-size: 14px;
 }
+
+.sync-show-bidding-button {
+    float: right;
+    background: #F0F0F0;
+    font-size: 12px;
+}
