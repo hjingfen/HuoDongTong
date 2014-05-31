@@ -2,15 +2,15 @@
   %head
     %meta(http-equiv="refresh" content="5")
   %body
-    - if flash[:bidding]
+    - if @is_bidding.present?
       .row(style="width:1365px;height:150px;background-color:#F5F5F5" )
         %h1(align='center' )
-          =@activity_name
+          =@is_bidding.activity_name
         %h3(align='center' )
           参与人数：
-          =@bidding_count
+          =@is_bidding.bidding_counts
           ='/'
-          =@sign_up_count
+          =@is_bidding.sign_up_counts
       .row(style="width:1320px;padding:20px 0px")
         .col-xs-12(style="padding-left:55px" )
           .panel.panel-default
@@ -24,13 +24,13 @@
                 %tr
                   %td= detail.name
                   %td= detail.phone
-    - if flash[:result]
+    - else
       .row(style="width:1365px;height:300px;background-color:#F5F5F5" )
         %h1(align='center' )
           = @activity_name
         %h2(align='center' )
           比赛结果：
-        - if flash[:winner]
+        - if @winner_exist
           %h3(align='center' )
             获胜者：
             = @winner.name
@@ -40,5 +40,5 @@
           %h3(align='center' )
             电话：
             = @winner.phone
-        - if flash[:no_winner]
+        - else
           %h3(align='center') 无人胜出！

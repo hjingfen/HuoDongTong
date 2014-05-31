@@ -82,26 +82,18 @@ class UsersController < ApplicationController
   end
 
   def show
-    bidding_activity = BiddingList.find_by(:status => 'start',:user_name => params[:user_name])
-    flash[:bidding] = flash[:result] = flash[:winner] = flash[:no_winner] = nil
-    if bidding_activity.present?
-      session[:current_activity_name] = bidding_activity[:activity_name]
-      session[:current_bid_name] = bidding_activity[:bid_name]
-      flash[:bidding] = true
-      @activity_name = bidding_activity.activity_name
-      @sign_up_count = bidding_activity.sign_up_counts
-      @bidding_count = bidding_activity.bidding_counts
-      bidding_details = BiddingDetail.where(:activity_name => @activity_name,:user_name => bidding_activity[:user_name],:bid_name => bidding_activity[:bid_name])
+    @is_bidding = BiddingList.find_by(:status => 'start',:user_name => params[:user_name])
+    if @is_bidding.present?
+      session[:current_activity_name] = @is_bidding[:activity_name]
+      session[:current_bid_name] = @is_bidding[:bid_name]
+      bidding_details = BiddingDetail.where(:activity_name => @is_bidding[:activity_name],:user_name => @is_bidding[:user_name],:bid_name => @is_bidding[:bid_name])
       @bidding_details = bidding_details.reverse().take(10)
     else
-      flash[:result] = true
       @activity_name = session[:current_activity_name]
       price = BiddingCount.find_by(:activity_name => session[:current_activity_name],:user_name => params[:user_name],:bid_name => session[:current_bid_name],:count => 1)
-      if price.present?
-        flash[:winner] = true
+      @winner_exist = BiddingCount.exists?(:activity_name => session[:current_activity_name],:user_name => params[:user_name],:bid_name => session[:current_bid_name],:count => 1)
+      if @winner_exist
         @winner = BiddingDetail.find_by(:price => price.price)
-      else
-        flash[:no_winner] = true
       end
     end
   end
@@ -127,7 +119,6 @@ class UsersController < ApplicationController
     else
       flash[:no_end] = true
     end
-
   end
 
   def prepare_header_data
