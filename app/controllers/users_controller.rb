@@ -2,6 +2,8 @@ class UsersController < ApplicationController
 
   skip_before_filter :verify_authenticity_token
 
+  before_action :prepare_header_data, :only => [:bidding_list, :sign_up_list, :provide_head_data]
+
   before_action :provide_head_data, :only => [:price_statistics, :bidding_detail]
 
   def index
@@ -64,19 +66,11 @@ class UsersController < ApplicationController
   end
 
   def bidding_list
-    @current_page = params[:page] ? params[:page].to_i-1 : 0
-    user_name = User.find(session[:user_id]).name
-    @user_name = params[:admin_user]
-    @activity_name = params[:activity_name]
-    @bid_lists = BiddingList.where(:activity_name => params[:activity_name],:user_name => user_name).paginate(page: params[:page],:per_page => 10)
+    @bid_lists = BiddingList.where(:activity_name => params[:activity_name],:user_name => @user.name).paginate(page: params[:page],:per_page => 10)
   end
 
   def sign_up_list
-    @current_page = params[:page] ? params[:page].to_i-1:0
-    user_name = User.find(session[:user_id]).name
-    @user_name = params[:admin_user]
-    @activity_name = params[:activity_name]
-    @sign_up_lists = SignUpList.where(:activity_name => params[:activity_name],:user_name => user_name).paginate(page: params[:page],:per_page => 10)
+    @sign_up_lists = SignUpList.where(:activity_name => params[:activity_name],:user_name => @user.name).paginate(page: params[:page],:per_page => 10)
   end
 
   def bidding_detail
@@ -136,6 +130,12 @@ class UsersController < ApplicationController
 
   end
 
+  def prepare_header_data
+    @current_page = params[:page] ? params[:page].to_i-1 : 0
+    @user = User.find(session[:user_id])
+    @user_name = params[:admin_user]
+    @activity_name = params[:activity_name]
+  end
 
 end
 
