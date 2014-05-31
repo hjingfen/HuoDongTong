@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   skip_before_filter :verify_authenticity_token
 
-  before_action :prepare_header_data, :only => [:bidding_list, :sign_up_list, :provide_head_data]
+  before_action :prepare_header_data, :only => [:bidding_list, :sign_up_list, :price_statistics, :bidding_detail]
 
   before_action :provide_head_data, :only => [:price_statistics, :bidding_detail]
 
@@ -101,23 +101,14 @@ class UsersController < ApplicationController
   private
 
   def provide_head_data
-    @current_page = params[:page] ? params[:page].to_i-1 : 0
-    @user = User.find(session[:user_id])
-    @user_name = params[:admin_user]
-    @activity_name = params[:activity_name]
     @bid_name = params[:bid_name]
-    price = BiddingCount.find_by(:activity_name => params[:activity_name],:user_name => @user.name,:bid_name => params[:bid_name],:count => 1)
-    bid = BiddingList.find_by(:activity_name => params[:activity_name],:user_name => @user.name,:bid_name => params[:bid_name])
+    @price_info = BiddingCount.find_by(:activity_name => params[:activity_name],:user_name => @user.name,:bid_name => params[:bid_name],:count => 1)
+    @bid = BiddingList.find_by(:activity_name => params[:activity_name],:user_name => @user.name,:bid_name => params[:bid_name])
     flash[:winner] = flash[:no_winner] = flash[:no_end] = nil
-    if bid[:status] == 'end'
-      if price.present?
-        flash[:winner] = true
-        @winner = BiddingDetail.find_by(:price => price.price)
-      else
-        flash[:no_winner] = true
+    if @bid[:status] == 'end'
+      if @price_info.present?
+        @winner = BiddingDetail.find_by(:price => @price_info.price)
       end
-    else
-      flash[:no_end] = true
     end
   end
 
