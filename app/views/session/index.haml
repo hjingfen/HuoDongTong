@@ -6,7 +6,7 @@
       .clearfix
         %h4用户登录
         %a.navbar-right(style="text-decoration: none;padding-right:20px" href="/users/new" )用户注册
-      %form(name='user' action="/signin" method="post" )
+      %form(name='user' action="/signin" method="post" onsubmit="return check_signin_form()")
         .col-xs-12.input-group
           %span.input-group-addon( style="width:109px" ) 账号
           %input.form-control(name="name" type="text" )
@@ -17,9 +17,9 @@
         .clearfix
           %a.navbar-right(style="text-decoration:none;padding-right:20px" href="/session/forgot1" )忘记密码
         %br
-        -if flash[:signin_error]
-          .text-center.alert-danger
-            %p(style="height:30px;line-height:30px;" ) 用户名不存在或密码错误！
+        .text-center.alert-danger#error_alert(style="display:#{flash[:signin_error].present? ? 'static' : 'none'}" )
+          %p(style="height:30px;line-height:30px;" )
+            = flash[:signin_error]
         %br
         .col-xs-4
         .col-xs-4

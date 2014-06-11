@@ -25,3 +25,13 @@ function check_password(){
         return true;
     }
 }
+
+function check_signin_form(){
+    var empty_inputs = _.select($('input'),function(el){
+        return $(el).val() == '';
+    });
+    if (empty_inputs.length != 0){
+        $('#error_alert').show().find('p').text('用户名或密码不能为空！')
+        return false;
+    }
+}
